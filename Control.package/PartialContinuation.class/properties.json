@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "ul 4/28/2011 00:13",
+	"super" : "Object",
+	"category" : "Control-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"context"
+	],
+	"name" : "PartialContinuation",
+	"type" : "normal"
+}
