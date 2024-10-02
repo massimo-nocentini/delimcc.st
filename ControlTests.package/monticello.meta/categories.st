@@ -1,1 +1,1 @@
-SystemOrganization addCategory: #ControlTests!
+self packageOrganizer ensurePackage: #ControlTests withTags: #()!
