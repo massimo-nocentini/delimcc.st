@@ -1,4 +1,1 @@
-SystemOrganization addCategory: #Control!
-SystemOrganization addCategory: #'Control-Core'!
-SystemOrganization addCategory: #'Control-Exceptions'!
-SystemOrganization addCategory: #'Control-Support'!
+self packageOrganizer ensurePackage: #Control withTags: #(#Core #Exceptions #Support)!
