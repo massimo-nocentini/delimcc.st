@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "fbs 6/27/2012 09:47",
+	"super" : "Notification",
+	"category" : "Delimcc-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
+		"Unset"
+	],
+	"instvars" : [
+		"dynVar",
+		"value"
+	],
+	"name" : "DelimitedDynamicVariableRef",
+	"type" : "normal"
+}

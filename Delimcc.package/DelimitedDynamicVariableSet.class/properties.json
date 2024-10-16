@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "fbs 3/1/2013 17:34",
+	"super" : "Object",
+	"category" : "Delimcc-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"variables"
+	],
+	"name" : "DelimitedDynamicVariableSet",
+	"type" : "normal"
+}
