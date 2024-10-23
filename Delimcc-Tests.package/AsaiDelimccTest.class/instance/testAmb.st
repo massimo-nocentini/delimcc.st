@@ -9,7 +9,7 @@ testAmb
                      (reify (f (f (amb 0 2 3 4 5 32)))))"
 
 	| res |
-	res := self amb: #( 1 2 3 ) in: [ :p | p ].
+	res := self amb: #( 1 2 3 ).
 
 	self assert: res equals: #( 1 2 3 ).
 
