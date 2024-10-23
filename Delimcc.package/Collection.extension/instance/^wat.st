@@ -3,5 +3,7 @@
 
 	| distribution |
 	distribution := DelimccDistribution new.
-	[ distribution add: aBlock ! [ :k | self collect: k ] shift ] reset.
+
+	[ self either: aBlock distribution: distribution ] reset.
+
 	^ distribution
