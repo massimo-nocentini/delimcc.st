@@ -18,7 +18,9 @@ testEitherBooleanSat1
 	        choices ? [ :q |
 	        p | q & (p | q not) & (p not | q not) ifTrue: [
 		        {
-			        p.
-			        q } ] ] ].
+			        (#p -> p).
+			        (#q -> q) } ] ] ].
 
-	self assert: sols values equals: #( #( true false ) )
+	self assert: sols values equals: { {
+			(#p -> true).
+			(#q -> false) } }
