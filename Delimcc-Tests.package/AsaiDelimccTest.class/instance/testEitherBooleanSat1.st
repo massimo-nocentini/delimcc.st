@@ -21,5 +21,4 @@ testEitherBooleanSat1
 			        p.
 			        q } ] ] ].
 
-	self assert: sols equals: #( #( nil #( true false ) )
-	   #( nil nil ) )
+	self assert: sols values equals: #( #( true false ) )
