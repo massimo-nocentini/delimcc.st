@@ -1,21 +1,17 @@
 tests
 testEitherBooleanSat
-	"(⊦= '(((p #t) (q #f))) 
-           (let1 (sols '())
-            (resetcc
-                      (let ((p (delimcc-either '(#t #f)))
-                            (q (delimcc-either '(#t #f))))
-                       (when (and (or p q) (or p (not q)) (or (not p) (not q)))
-                        (push! `((p ,p) (q ,q)) sols))))
-            sols))"
 
 	| sols choices |
 	choices := { true. false }.
-	sols := OrderedCollection new.
+	sols := Array streamContents: [ :s |
+		        [
+		        | p q |
+		        p := self delimccEither: choices.
+		        [
+		        q := self delimccEither: choices.
+		        p | q & (p | q not) & (p not | q not) ifTrue: [
+			        s nextPut: {
+					        p.
+					        q } ] ] reset ] reset ].
 
-	self
-		assert: [
-			| p q |
-			p := self delimccEither: choices.
-			q := self delimccEither: choices ] reset asArray
-		equals: #( 1 4 3 )
+	self assert: sols equals: #( #( true false ) )
