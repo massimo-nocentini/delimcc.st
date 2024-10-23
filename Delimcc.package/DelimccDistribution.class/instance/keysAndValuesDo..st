@@ -1,0 +1,4 @@
+enumerating
+keysAndValuesDo: aFullBlockClosure
+
+	distribution keysAndValuesDo: aFullBlockClosure

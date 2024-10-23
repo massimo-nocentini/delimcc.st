@@ -14,4 +14,4 @@ testEither
 		       1.
 		       (2 + 2).
 		       3 } ? [ :p | p ].
-	self assert: res equals: #( 1 4 3 )
+	self assert: res values equals: #( 1 4 3 )

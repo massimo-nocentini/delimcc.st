@@ -1,0 +1,4 @@
+adding
+addInDelimccDistribution: aDistribution
+
+	aDistribution addDelimccDistribution: self

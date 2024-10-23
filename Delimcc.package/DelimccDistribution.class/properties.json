@@ -6,7 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"distribution"
+		"distribution",
+		"count"
 	],
 	"name" : "DelimccDistribution",
 	"type" : "normal"
