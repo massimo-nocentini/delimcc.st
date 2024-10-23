@@ -1,4 +1,4 @@
-adding
+adding - dispatched
 addDelimccDistribution: aDistribution
 
 	aDistribution keysAndValuesDo: [ :value :occurrences |

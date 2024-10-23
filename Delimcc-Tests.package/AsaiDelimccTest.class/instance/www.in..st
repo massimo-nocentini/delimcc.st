@@ -1,5 +1,5 @@
 tests
-wwwF: x in: aBlock
+www: x in: aBlock
 
 	^ self
 		  amb: #( 6 4 2 8 )

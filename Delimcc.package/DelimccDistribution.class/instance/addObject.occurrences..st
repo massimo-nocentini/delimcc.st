@@ -1,9 +1,8 @@
-adding
+adding - dispatched
 addObject: anObject occurrences: o
 
-	anObject ifNotNil: [
-		| v |
-		v := distribution at: anObject ifAbsentPut: 0.
-		distribution at: anObject put: v + o.
+	| v |
+	v := distribution at: anObject ifAbsentPut: 0.
+	distribution at: anObject put: v + o.
 
-		count := count + o ]
+	count := count + o

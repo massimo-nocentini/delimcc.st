@@ -1,6 +1,9 @@
 accessing
 rank
 
-	^ distribution associations
-		  collect: [ :each | each key -> (each value / count) asFloat ];
-		  timsort: #value reverse: true
+	| rank c |
+	c := count asFloat.
+	rank := distribution associations collect: [ :each |
+		        each key -> (each value / c) ].
+
+	^ rank timsort: #value reverse: true

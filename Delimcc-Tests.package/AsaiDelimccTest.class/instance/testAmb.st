@@ -22,7 +22,7 @@ testAmb
 	res := self
 		       amb: #( 0 2 3 4 5 32 )
 		       in: [ :p |
-		       self wwwF: p in: [ :v | self wwwF: v in: [ :u | u ] ] ].
+		       self www: p in: [ :v | self www: v in: [ :u | u ] ] ].
 
 	self
 		assert: res
@@ -144,8 +144,8 @@ testAmb
 
 	res := self amb: #( 0 2 3 4 5 32 ) in: [ :p |
 		       self
-			       wwwF: p
+			       www: p
 			       in: [ :v |
-			       self wwwF: v in: [ :u | self wwwF: u in: [ :r | r ] ] ] ].
+			       self www: v in: [ :u | self www: u in: [ :r | r ] ] ] ].
 
 	self assert: res size equals: 48000
