@@ -13,7 +13,7 @@ testEither
 	res := {
 		       1.
 		       (2 + 1).
-		       3 } eitherDistribution.
+		       3 } ? [ :p | p ].
 
 	self
 		assert: res values equals: #( 1 3 3 );
