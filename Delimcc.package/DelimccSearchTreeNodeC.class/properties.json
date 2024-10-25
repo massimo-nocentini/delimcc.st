@@ -1,14 +1,13 @@
 {
 	"commentStamp" : "",
-	"super" : "Object",
+	"super" : "DelimccSearchTreeNode",
 	"category" : "Delimcc-Core",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"distribution",
-		"count"
+		"block"
 	],
-	"name" : "DelimccDistribution",
+	"name" : "DelimccSearchTreeNodeC",
 	"type" : "normal"
 }

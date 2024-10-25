@@ -6,9 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"distribution",
-		"count"
+		"children"
 	],
-	"name" : "DelimccDistribution",
+	"name" : "DelimccSearchTree",
 	"type" : "normal"
 }
