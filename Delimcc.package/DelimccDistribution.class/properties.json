@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Delimcc-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"distribution",
+		"count"
+	],
+	"name" : "DelimccDistribution",
+	"type" : "normal"
+}
