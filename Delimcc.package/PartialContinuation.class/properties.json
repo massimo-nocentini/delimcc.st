@@ -6,7 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"context"
+		"from",
+		"to"
 	],
 	"name" : "PartialContinuation",
 	"type" : "normal"

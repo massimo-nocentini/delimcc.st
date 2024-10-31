@@ -4,8 +4,8 @@ stack
 
 	| result currentContext |
 	result := OrderedCollection new.
-	currentContext := context.
+	currentContext := self context.
 	[ currentContext isNil ] whileFalse: [
 		result addLast: currentContext.
 		currentContext := currentContext sender ].
-	^result
+	^ result
