@@ -6,19 +6,23 @@ shift
 	resetCtxt := DelimitedControlException signal ifNil: [
 		             ^ MissingResetException signal ].
 
-	"resetCtxt is not where we want to cut. Because we use #on:do: to mark the stack, rather than marking the reset's context directly, it's the marked context that we want to leave on the stack. We need to cut to the context whose sender is resetCtxt."
+	"resetCtxt is not where we want to cut. Because we use #on:do: to mark the stack, 
+	rather than marking the reset's context directly, it's the marked context that we 
+	want to leave on the stack. We need to cut to the context whose sender is resetCtxt."
 
 	currentCtxt := thisContext.
 
-	cc := currentCtxt.
-	[ cc sender == resetCtxt ] whileFalse: [ cc := cc sender ].
+	cc := currentCtxt findContextSuchThat: [ :each |
+		      each size > 0 and: [ (each at: 1) == resetCtxt ] ].
+
+	cc := cc sender.
 
 	"Store the stack from _below_ the shift to just _below_ the reset marker."
 	fun := PartialContinuation new
-		       from: currentCtxt sender downTo: cc sender;
+		       from: currentCtxt sender downTo: cc;
 		       yourself.
 
 	"Throw away the stack down to just _above_ the reset marker."
-	currentCtxt swapSender: cc sender.
+	currentCtxt swapSender: cc.
 
 	^ self value: fun
