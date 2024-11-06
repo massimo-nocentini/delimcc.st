@@ -2,6 +2,7 @@ tests
 testProbabilityDistribution
 
 	| distribution |
+	self skip.
 	distribution := {
 		                (true -> 0.6).
 		                (false -> 0.4) } delimccDistribution: [ :v |

@@ -5,6 +5,4 @@ testDiscardContinuation
 
 	self assert: [ 1 - (3 + [ :k | #hello ] shift) ] reset equals: #hello.
 
-	self
-		assert: [ 1 - (3 + (self discardDelimcc: #hello)) ] reset
-		equals: #hello
+	self assert: [ 1 - (3 + #hello discardDelimcc) ] reset equals: #hello

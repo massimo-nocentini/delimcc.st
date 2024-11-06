@@ -1,4 +1,4 @@
-delimcc
+*Delimcc
 extractDelimcc
 
 	^ [ :k | k ] shift

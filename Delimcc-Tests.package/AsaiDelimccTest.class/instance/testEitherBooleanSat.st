@@ -6,12 +6,11 @@ testEitherBooleanSat
 	sols := Array streamContents: [ :s |
 		        [
 		        | p q |
-		        p := self delimccEither: choices.
-		        [
-		        q := self delimccEither: choices.
+		        p := choices collectShift.
+		        q := choices collectShift.
 		        p | q & (p | q not) & (p not | q not) ifTrue: [
 			        s nextPut: {
 					        p.
-					        q } ] ] reset ] reset ].
+					        q } ] ] reset ].
 
 	self assert: sols equals: #( #( true false ) )

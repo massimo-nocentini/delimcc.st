@@ -1,4 +1,4 @@
 *Delimcc
-shift
+collectShift
 
 	^ [ :k | self collect: k ] shift

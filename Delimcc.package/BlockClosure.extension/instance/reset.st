@@ -1,13 +1,8 @@
 *Delimcc
 reset
 
-	| context v |
+	| context |
 	context := thisContext.
-
 	context at: 1 put: context.
 
-	v := self resetContext: context.
-
-	context at: 1 put: nil.
-
-	^ v
+	^ [ self resetContext: context ] ensure: [ context at: 1 put: nil ]
