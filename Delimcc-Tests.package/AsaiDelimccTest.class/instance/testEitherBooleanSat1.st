@@ -4,23 +4,22 @@ testEitherBooleanSat1
 	| sols choices |
 	choices := { true. false }.
 
-	sols := Array streamContents: [ :s |
-		        choices ? [ :p |
-		        choices ? [ :q |
-		        p | q & (p | q not) & (p not | q not) ifTrue: [
-			        s nextPut: {
-					        p.
-					        q } ] ] ] ].
+	sols := [
+	        | p q |
+	        p := choices collectShift.
+	        q := choices collectShift.
 
-	self assert: sols equals: #( #( true false ) ).
+	        p | q & (p | q not) & (p not | q not)
+		        ifTrue: [
+			        {
+				        (#p -> p).
+				        (#q -> q) } ]
+		        ifFalse: [ #fail ] ] reset.
 
-	sols := choices ? [ :p |
-	        choices ? [ :q |
-	        p | q & (p | q not) & (p not | q not) ifTrue: [
-		        {
-			        (#p -> p).
-			        (#q -> q) } ] ] ].
-
-	self assert: sols values equals: { {
-			(#p -> true).
-			(#q -> false) } }
+	self assert: sols equals: {
+			{
+				#fail.
+				{
+					(#p -> true).
+					(#q -> false) } }.
+			{ #fail. #fail } }
