@@ -1,1 +1,1 @@
-self packageOrganizer ensurePackage: #Delimcc withTags: #(#Core #Exceptions #Support)!
+self packageOrganizer ensurePackage: #Delimcc withTags: #(#Core #Exceptions #Hansei #Support)!
