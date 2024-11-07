@@ -2,12 +2,11 @@ exploring
 inferenceUpToDepth: maxDepth
 
 	| l ans choices pair |
-	pair := self
+	pair := self choiceValueLink
 		        probability: 1.0
 		        depth: 0
 		        upToDepth: maxDepth
 		        down: true
-		        choices: self choiceValueLink
 		        map: nil
 		        suspLink: nil.
 
