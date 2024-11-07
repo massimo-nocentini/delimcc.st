@@ -3,8 +3,9 @@ value: anObject
 	"Copy the contexts of the continuation and stitch them onto the current call stack by telling the bottom context that thisContext's sender called it. 'thisContext sender' because thisContext refers to the context of the #value: call."
 
 	| topContext bottomContext |
-	topContext := self context
-		              copyTo: nil
+	topContext := self
+		              copy: self context
+		              to: nil
 		              bottomContextDo: [ :bc | bottomContext := bc ]. "copy the whole stack"
 	bottomContext swapSender: thisContext sender.
 	"Tell thisContext that its sender was actually the last/top-most context."

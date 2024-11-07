@@ -1,3 +1,4 @@
 *Delimcc
 compose: aUnaryBlock
-	^ [:x | self value: (aUnaryBlock value: x)].
+
+	^ [ :x | self value: (aUnaryBlock value: x) ]
