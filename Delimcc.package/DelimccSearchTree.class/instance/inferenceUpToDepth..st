@@ -1,8 +1,8 @@
 exploring
 inferenceUpToDepth: maxDepth
 
-	| l ans choices pair |
-	pair := self choiceValueLink
+	| l ans pair |
+	pair := self children
 		        probability: 1.0
 		        depth: 0
 		        upToDepth: maxDepth
@@ -13,16 +13,10 @@ inferenceUpToDepth: maxDepth
 	l := pair first.
 	ans := pair second.
 
-	choices := Dictionary new.
-
 	[ ans ] whileNotNil: [
 		l := ans value ~~> l.
 		ans := ans nextLink ].
 
-	[ l ] whileNotNil: [
-		choices at: l value key put: l value value.
-		l := l nextLink ].
-
 	^ self class new
-		  children: choices;
+		  children: l;
 		  yourself

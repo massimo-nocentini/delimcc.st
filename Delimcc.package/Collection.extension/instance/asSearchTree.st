@@ -8,7 +8,7 @@ asSearchTree
 
 	self do: [ :each |
 		| v |
-		v := choices at: each ifAbsentPut: 0.0.
+		v := choices at: each ifAbsent: 0.0.
 		choices at: each put: v + p ].
 
 	^ choices asSearchTree

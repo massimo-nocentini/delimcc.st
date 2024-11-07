@@ -11,4 +11,4 @@ testGrassModel
 			                      true bernoulli: 0.1 ] ].
 	        grassIsWet when: [ rain ] ] hansei inferenceExact.
 
-	self assert: tree children associations asSet equals: Set new
+	self assert: tree children asLinkedList asSet equals: Set new

@@ -2,7 +2,7 @@
 asSearchTree
 
 	| choices |
-	choices := self class new: self size.
+	choices := nil.
 
 	self keysAndValuesDo: [ :each :weight |
 		| node |
@@ -10,7 +10,7 @@ asSearchTree
 			        slot: each;
 			        yourself.
 
-		choices at: node put: weight ].
+		choices := node -> weight ~~> choices ].
 
 	^ DelimccSearchTree new
 		  children: choices;

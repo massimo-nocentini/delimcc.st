@@ -3,10 +3,8 @@ localProbability: pt probability: p depth: depth upToDepth: maxDepth down: down 
 
 	^ down
 		  ifTrue: [
-			  | pair t |
-			  t := self slot value.
-
-			  pair := t choiceValueLink
+			  | pair |
+			  pair := self slot value children
 				          probability: pt * p
 				          depth: depth + 1
 				          upToDepth: maxDepth
@@ -22,12 +20,10 @@ localProbability: pt probability: p depth: depth upToDepth: maxDepth down: down 
 				  map: pair second
 				  suspLink: pair first ]
 		  ifFalse: [
-			  super
-				  localProbability: pt
+			  rest
 				  probability: p
 				  depth: depth
 				  upToDepth: maxDepth
 				  down: down
-				  choices: rest
 				  map: ans
-				  suspLink: susp ]
+				  suspLink: self -> (pt * p) ~~> susp ]
