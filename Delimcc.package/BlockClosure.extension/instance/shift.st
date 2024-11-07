@@ -6,6 +6,7 @@ shift
 	resetCtxt := DelimitedControlException signal ifNil: [
 		             ^ MissingResetException signal ].
 
+
 	"resetCtxt is not where we want to cut. Because we use #on:do: to mark the stack, 
 	rather than marking the reset's context directly, it's the marked context that we 
 	want to leave on the stack. We need to cut to the context whose sender is resetCtxt."
@@ -13,7 +14,7 @@ shift
 	currentCtxt := thisContext.
 
 	cc := currentCtxt findContextSuchThat: [ :each |
-		      each size > 0 and: [ (each at: 1) == resetCtxt ] ].
+		      each numTemps = 1 and: [ (each tempAt: 1) == resetCtxt ] ].
 
 	cc := cc sender.
 
