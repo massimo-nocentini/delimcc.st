@@ -6,6 +6,6 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "ControlTests",
+	"name" : "ControlTest",
 	"type" : "normal"
 }
