@@ -1,7 +1,7 @@
 exploring
 inferenceUpToDepth: maxDepth
 
-	| l ans |
+	| l ans choices |
 	ans := Dictionary new.
 
 	l := self
@@ -13,11 +13,10 @@ inferenceUpToDepth: maxDepth
 		     map: ans
 		     suspLink: nil.
 
-
 	ans keysAndValuesDo: [ :v :prob |
 		| w |
 		w := DelimccSearchTreeNodeV new
-			     value: v;
+			     slot: v;
 			     yourself.
 
 		l := ValueLink new
@@ -25,6 +24,12 @@ inferenceUpToDepth: maxDepth
 			     nextLink: l;
 			     yourself ].
 
+	choices := Dictionary new.
+
+	[ l ] whileNotNil: [
+		choices at: l value key put: l value value.
+		l := l nextLink ].
+
 	^ self class new
-		  children: (Dictionary newFromPairs: l asLinkedList);
+		  children: choices;
 		  yourself
