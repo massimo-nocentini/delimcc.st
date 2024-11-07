@@ -3,14 +3,12 @@ localProbability: pt tree: tree probability: p depth: depth upToDepth: maxDepth 
 
 	^ down
 		  ifTrue: [
-			  | dw l |
-			  dw := maxDepth ifNil: [ true ] ifNotNil: [ depth < maxDepth ].
-
+			  | l |
 			  l := tree
 				       probability: pt * p
 				       depth: depth + 1
 				       upToDepth: maxDepth
-				       down: dw
+				       down: depth < maxDepth
 				       choices: self slot value choiceValueLink
 				       map: ans
 				       suspLink: susp.

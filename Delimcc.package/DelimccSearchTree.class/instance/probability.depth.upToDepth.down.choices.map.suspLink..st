@@ -1,35 +1,22 @@
 exploring
 probability: p depth: depth upToDepth: maxDepth down: down choices: choicesLink map: ans suspLink: susp
 
-	| l |
-	l := choicesLink ifNil: [ susp ] ifNotNil: [
-		     | node pt rest |
-		     node := choicesLink value key.
-		     pt := choicesLink value value.
-		     rest := choicesLink nextLink.
+	^ choicesLink ifNil: [ susp ] ifNotNil: [
+		  | node pt rest probAssoc |
+		  probAssoc := choicesLink value.
 
-		     node
-			     localProbability: pt
-			     tree: self
-			     probability: p
-			     depth: depth
-			     upToDepth: maxDepth
-			     down: down
-			     choices: choicesLink
-			     map: ans
-			     suspLink: susp ].
+		  node := probAssoc key.
+		  pt := probAssoc value.
 
-	ans keysAndValuesDo: [ :v :prob |
-		| w |
-		w := DelimccSearchTreeNodeV new
-			     value: v;
-			     yourself.
+		  rest := choicesLink nextLink.
 
-		l := ValueLink new
-			     value: w -> prob;
-			     nextLink: l;
-			     yourself ].
-
-	^ self class new
-		  children: l asLinkedList;
-		  yourself
+		  node
+			  localProbability: pt
+			  tree: self
+			  probability: p
+			  depth: depth
+			  upToDepth: maxDepth
+			  down: down
+			  choices: rest
+			  map: ans
+			  suspLink: susp ]

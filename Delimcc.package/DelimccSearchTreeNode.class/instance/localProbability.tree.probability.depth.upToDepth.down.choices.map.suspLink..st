@@ -3,7 +3,7 @@ localProbability: pt tree: tree probability: p depth: depth upToDepth: maxDepth 
 
 	| l |
 	l := ValueLink new
-		     value: self slot -> (pt * p);
+		     value: self -> (pt * p);
 		     nextLink: susp;
 		     yourself.
 

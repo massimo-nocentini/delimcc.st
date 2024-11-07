@@ -13,4 +13,4 @@ testProbabilityDistribution
 				                v.
 				                w } ] ].
 
-	(distribution exploreUpToDepth: 4) inspect
+	(distribution inferenceUpToDepth: 4) inspect

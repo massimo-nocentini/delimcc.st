@@ -1,6 +1,6 @@
 accessing
 choiceValueLink
 
-	^ self children
+	^ self children associations
 		  ifEmpty: [ nil ]
 		  ifNotEmpty: [ :l | l asLinkedList firstLink ]
