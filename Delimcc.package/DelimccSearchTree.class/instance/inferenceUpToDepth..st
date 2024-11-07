@@ -16,17 +16,11 @@ inferenceUpToDepth: maxDepth
 	choices := Dictionary new.
 
 	[ ans ] whileNotNil: [
-		l := ValueLink new
-			     value: ans value;
-			     nextLink: l;
-			     yourself.
-
+		l := ans value ~~> l.
 		ans := ans nextLink ].
 
 	[ l ] whileNotNil: [
-		| v |
-		v := choices at: l value key ifAbsentPut: 0.0.
-		choices at: l value key put: l value value + v.
+		choices at: l value key put: l value value.
 		l := l nextLink ].
 
 	^ self class new
