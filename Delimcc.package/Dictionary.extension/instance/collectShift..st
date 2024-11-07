@@ -3,7 +3,7 @@ collectShift: aBlock
 
 	^ [ :k |
 	  | choices |
-	  choices := self class new.
+	  choices := self class new: self size.
 
 	  self keysAndValuesDo: [ :each :weight |
 		  | node |
