@@ -3,15 +3,17 @@ localProbability: pt tree: tree probability: p depth: depth upToDepth: maxDepth 
 
 	^ down
 		  ifTrue: [
-			  | l |
-			  l := tree
-				       probability: pt * p
-				       depth: depth + 1
-				       upToDepth: maxDepth
-				       down: depth < maxDepth
-				       choices: self slot value choiceValueLink
-				       map: ans
-				       suspLink: susp.
+			  | pair t |
+			  t := self slot value.
+
+			  pair := tree
+				          probability: pt * p
+				          depth: depth + 1
+				          upToDepth: maxDepth
+				          down: depth < maxDepth
+				          choices: t choiceValueLink
+				          map: ans
+				          suspLink: susp.
 
 			  tree
 				  probability: p
@@ -19,8 +21,8 @@ localProbability: pt tree: tree probability: p depth: depth upToDepth: maxDepth 
 				  upToDepth: maxDepth
 				  down: down
 				  choices: rest
-				  map: ans
-				  suspLink: l ]
+				  map: pair second
+				  suspLink: pair first ]
 		  ifFalse: [
 			  super
 				  localProbability: pt

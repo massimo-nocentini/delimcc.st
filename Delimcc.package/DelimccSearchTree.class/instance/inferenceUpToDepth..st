@@ -1,33 +1,33 @@
 exploring
 inferenceUpToDepth: maxDepth
 
-	| l ans choices |
-	ans := Dictionary new.
+	| l ans choices pair |
+	pair := self
+		        probability: 1.0
+		        depth: 0
+		        upToDepth: maxDepth
+		        down: true
+		        choices: self choiceValueLink
+		        map: nil
+		        suspLink: nil.
 
-	l := self
-		     probability: 1.0
-		     depth: 0
-		     upToDepth: maxDepth
-		     down: true
-		     choices: self choiceValueLink
-		     map: ans
-		     suspLink: nil.
-
-	ans keysAndValuesDo: [ :v :prob |
-		| w |
-		w := DelimccSearchTreeNodeV new
-			     slot: v;
-			     yourself.
-
-		l := ValueLink new
-			     value: w -> prob;
-			     nextLink: l;
-			     yourself ].
+	l := pair first.
+	ans := pair second.
 
 	choices := Dictionary new.
 
+	[ ans ] whileNotNil: [
+		l := ValueLink new
+			     value: ans value;
+			     nextLink: l;
+			     yourself.
+
+		ans := ans nextLink ].
+
 	[ l ] whileNotNil: [
-		choices at: l value key put: l value value.
+		| v |
+		v := choices at: l value key ifAbsentPut: 0.0.
+		choices at: l value key put: l value value + v.
 		l := l nextLink ].
 
 	^ self class new
