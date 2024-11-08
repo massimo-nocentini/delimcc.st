@@ -2,20 +2,12 @@
 collectShift: aBlock
 
 	^ [ :k |
-	  | choices |
-	  choices := nil.
+	  | dict |
+	  dict := self class new: self size.
 
-	  self keysAndValuesDo: [ :each :weight |
-		  | node |
-		  node := DelimccSearchTreeNodeC new
-			          slot: [
-				          | newKey |
-				          "newKey := aBlock value: each."
-				          k value: each ];
-			          yourself.
+	  self keysAndValuesDo: [ :each :v |
+		  | w |
+		  w := aBlock value: each value: v.
+		  dict at: each put: w ].
 
-		  choices := node -> weight ~~> choices ].
-
-	  DelimccSearchTree new
-		  children: choices;
-		  yourself ] shift
+	  dict ] shift
