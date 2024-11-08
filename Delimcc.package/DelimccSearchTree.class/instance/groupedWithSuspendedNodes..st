@@ -11,7 +11,7 @@ groupedWithSuspendedNodes: include
 		| assoc |
 		assoc := l value.
 
-		assoc key addInVDictionary: d inCDictionary: c weight: assoc value.
+		assoc key vDictionary: d cDictionary: c weight: assoc value.
 
 		l := l nextLink ].
 

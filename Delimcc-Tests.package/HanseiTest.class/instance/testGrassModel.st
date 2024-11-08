@@ -1,7 +1,7 @@
 tests
 testGrassModel
 
-	| tree |
+	| tree values |
 	tree := [
 	        | rain sprinkler grassIsWet |
 	        rain := true bernoulli: 0.3.
@@ -11,6 +11,8 @@ testGrassModel
 			                      true bernoulli: 0.1 ] ].
 	        grassIsWet when: [ rain ] ] hansei.
 
+	values := tree inferenceExact asValuesDictionary.
+
 	self
-		assert: tree inferenceExact grouped children asLinkedList asSet
-		equals: Set new
+		assert: (values at: true) equals: 0.2838;
+		assert: (values at: false) equals: 0.322
