@@ -1,4 +1,4 @@
 *Delimcc
 when: aBlock
 
-	^ Dictionary new collectShift
+	^ {  } asSearchTreeShift
