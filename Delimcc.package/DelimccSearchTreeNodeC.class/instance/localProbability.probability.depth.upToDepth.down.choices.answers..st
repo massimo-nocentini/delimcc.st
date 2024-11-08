@@ -4,7 +4,7 @@ localProbability: pt probability: p depth: depth upToDepth: maxDepth down: down 
 	^ down
 		  ifTrue: [
 			  | moreAnswers |
-			  moreAnswers := self slot value children
+			  moreAnswers := self children
 				                 probability: pt * p
 				                 depth: depth + 1
 				                 upToDepth: maxDepth

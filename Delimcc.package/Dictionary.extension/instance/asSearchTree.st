@@ -5,12 +5,17 @@ asSearchTree
 	choices := nil.
 
 	self keysAndValuesDo: [ :each :weight |
-		| node |
+		| node weightedValue |
 		node := DelimccSearchTreeNodeV new
 			        slot: each;
 			        yourself.
 
-		choices := node -> weight ~~> choices ].
+		weightedValue := HanseiProbabilityValue new
+			                 object: node;
+			                 weight: weight;
+			                 yourself.
+
+		choices := weightedValue ~~> choices ].
 
 	^ DelimccSearchTree new
 		  children: choices;

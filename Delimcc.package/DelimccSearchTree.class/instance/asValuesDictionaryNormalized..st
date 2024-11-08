@@ -6,11 +6,14 @@ asValuesDictionaryNormalized: normalized
 	values := Dictionary new.
 	cumulated := 0.0.
 
-	self children do: [ :assoc |
+	self children do: [ :weightedValue |
 		| w |
-		w := assoc value.
+		w := weightedValue weight.
 		cumulated := cumulated + w.
-		assoc key vDictionary: values cDictionary: suspended weight: w ].
+		weightedValue object
+			vDictionary: values
+			cDictionary: suspended
+			weight: w ].
 
 	normalized ifTrue: [
 		values keysAndValuesDo: [ :k :v |
