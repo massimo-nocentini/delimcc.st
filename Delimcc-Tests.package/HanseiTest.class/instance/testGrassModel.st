@@ -9,6 +9,8 @@ testGrassModel
 	        grassIsWet := (true bernoulli: 0.9) & rain or: [
 		                      (true bernoulli: 0.8) & sprinkler or: [
 			                      true bernoulli: 0.1 ] ].
-	        grassIsWet when: [ rain ] ] hansei inferenceExact.
+	        grassIsWet when: [ rain ] ] hansei.
 
-	self assert: tree children asLinkedList asSet equals: Set new
+	self
+		assert: tree inferenceExact grouped children asLinkedList asSet
+		equals: Set new

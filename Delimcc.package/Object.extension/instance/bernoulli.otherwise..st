@@ -1,5 +1,8 @@
 *Delimcc
-bernoulli: p otherwise: other
+bernoulli: prob otherwise: other
+
+	| p |
+	p := prob min: 1 max: 0.
 
 	^ Dictionary new
 		  at: self put: p;

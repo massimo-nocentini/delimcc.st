@@ -1,5 +1,5 @@
 *Delimcc
-probability: p depth: depth upToDepth: maxDepth down: down map: ans suspLink: susp
+probability: p depth: depth upToDepth: maxDepth down: down answers: answers
 
 	| probAssoc |
 	probAssoc := self value.
@@ -11,5 +11,4 @@ probability: p depth: depth upToDepth: maxDepth down: down map: ans suspLink: su
 		  upToDepth: maxDepth
 		  down: down
 		  choices: self nextLink
-		  map: ans
-		  suspLink: susp
+		  answers: answers
