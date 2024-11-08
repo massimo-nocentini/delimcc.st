@@ -12,5 +12,7 @@ The following code is taken from Scheme48 implementation:
 
 "
 
-	^ [ :k | k value: (self value: [ :x | [ :k1 | k value: x ] shift ]) ]
-		  shift
+	^ [
+	  [
+	  [ :k | k value: (self value: [ :x | [ :k1 | k value: x ] shift ]) ]
+		  shift ] reset ] reset
