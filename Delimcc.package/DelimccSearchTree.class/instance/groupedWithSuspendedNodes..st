@@ -5,15 +5,10 @@ groupedWithSuspendedNodes: include
 	d := Dictionary new.
 	c := Dictionary new.
 
-	l := self children.
+	self children do: [ :assoc |
+		assoc key vDictionary: d cDictionary: c weight: assoc value ].
 
-	[ l ] whileNotNil: [
-		| assoc |
-		assoc := l value.
-
-		assoc key vDictionary: d cDictionary: c weight: assoc value.
-
-		l := l nextLink ].
+	l := nil.
 
 	d keysAndValuesDo: [ :each :p |
 		| node |

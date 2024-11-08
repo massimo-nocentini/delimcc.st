@@ -1,11 +1,24 @@
 printing
 printOn: aStream
 
-	aStream
-		<< 'a search tree with ';
-		<< self children size asString;
-		<< ' children: '.
+	| pair |
+	pair := self asValuesDictionaryNormalized: true.
 
-	(self groupedWithSuspendedNodes: false) children do: [ :each |
+	aStream << 'a SearchTree(values distribution {'.
+
+	pair first keysAndValuesDo: [ :each :p |
+		aStream
+			space;
+			<< '('.
+
 		each printOn: aStream.
-		aStream << ', ' ]
+		aStream
+			<< ' ~ ';
+			<< (p printShowingDecimalPlaces: 3);
+			<< ')' ].
+
+	aStream << ' }, '.
+
+	pair second size printOn: aStream.
+
+	aStream << ' branches left)'
