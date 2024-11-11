@@ -1,10 +1,10 @@
 tests
-testFlipRecursive
+testFlipRecursiveReflect
 
 	| tree values pair p |
 	p := 0.6.
 
-	tree := [ self flip: p remaining: 10 ] hansei.
+	tree := [ self reflectFlip: p remaining: 10 ] hansei.
 
 	pair := tree inferenceExact asValuesDictionary.
 	values := pair first.

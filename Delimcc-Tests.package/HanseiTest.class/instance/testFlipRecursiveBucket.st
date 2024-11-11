@@ -1,10 +1,16 @@
 tests
-testFlipRecursive
+testFlipRecursiveBucket
 
-	| tree values pair p |
+	| tree values pair f p |
 	p := 0.6.
 
-	tree := [ self flip: p remaining: 10 ] hansei.
+	f := [ :n |
+	     n = 1
+		     ifTrue: [ true bernoulli: p ]
+		     ifFalse: [ (true bernoulli: 1 - p) ~= (f value: n - 1) ] ]
+		     bucket.
+
+	tree := [ f value: 10 ] hansei.
 
 	pair := tree inferenceExact asValuesDictionary.
 	values := pair first.
