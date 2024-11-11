@@ -1,13 +1,15 @@
 {
-	"commentStamp" : "",
-	"super" : "Object",
-	"category" : "Delimcc-Hansei",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "TCTMonadCategory classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"children"
 	],
 	"name" : "DelimccSearchTree",
-	"type" : "normal"
+	"commentStamp" : "",
+	"super" : "Object",
+	"traitcomposition" : "TCTMonadCategory",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Delimcc-Hansei"
 }

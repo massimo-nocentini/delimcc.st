@@ -7,9 +7,7 @@ asSearchTreeShift
 
 	  self keysAndValuesDo: [ :each :weight |
 		  | node weightedValue |
-		  node := DelimccSearchTreeNodeC new
-			          slot: [ k value: each ];
-			          yourself.
+		  node := DelimccSearchTreeNode suspended: [ k value: each ].
 
 		  weightedValue := HanseiProbabilityValue new
 			                   object: node;

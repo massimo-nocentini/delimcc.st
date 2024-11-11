@@ -1,0 +1,4 @@
+monad
+>>= aBlock
+
+	self subclassResponsibility

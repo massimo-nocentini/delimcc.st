@@ -6,9 +6,7 @@ asSearchTree
 
 	self keysAndValuesDo: [ :each :weight |
 		| node weightedValue |
-		node := DelimccSearchTreeNodeV new
-			        slot: each;
-			        yourself.
+		node := DelimccSearchTreeNode valued: each.
 
 		weightedValue := HanseiProbabilityValue new
 			                 object: node;
