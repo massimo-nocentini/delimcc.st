@@ -8,7 +8,7 @@ value: anObject
 	bottomContext := nil.
 
 	topContext := self
-		              copy: context
+		              copy: self context
 		              to: nil
 		              bottomContextDo: [ :bc | bottomContext := bc ]. "copy the whole stack"
 
