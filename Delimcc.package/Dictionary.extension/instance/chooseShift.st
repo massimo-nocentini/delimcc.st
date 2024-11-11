@@ -1,5 +1,5 @@
 *Delimcc
-asSearchTreeShift
+chooseShift
 
 	^ [ :k |
 	  | choices |

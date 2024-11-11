@@ -1,4 +1,4 @@
 *Delimcc
 when: aBlock
 
-	^ {  } asSearchTreeShift
+	^ {  } chooseShift

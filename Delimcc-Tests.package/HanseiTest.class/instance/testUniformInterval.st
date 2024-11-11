@@ -2,7 +2,7 @@ tests
 testUniformInterval
 
 	| tree values pair |
-	tree := [ (1 to: 20) asSearchTreeShift ] hansei.
+	tree := [ (1 to: 20) chooseShift ] hansei.
 
 	pair := tree inferenceExact asValuesDictionary.
 	values := pair first.
