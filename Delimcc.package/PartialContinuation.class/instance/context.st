@@ -1,4 +1,4 @@
 accessing
 context
 
-	^ context ifNil: [ context := from copyTo: to ]
+	^ from copyTo: to

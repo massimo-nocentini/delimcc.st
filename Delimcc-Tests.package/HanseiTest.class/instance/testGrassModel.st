@@ -11,7 +11,7 @@ testGrassModel
 			                      true bernoulli: 0.1 ] ].
 	        grassIsWet when: [ rain ] ] hansei.
 
-	pair := tree inferenceExact asValuesDictionary.
+	pair := tree inferenceExact inspect; asValuesDictionary.
 	values := pair first.
 
 	self

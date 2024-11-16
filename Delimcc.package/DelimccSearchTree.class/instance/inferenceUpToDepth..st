@@ -3,7 +3,7 @@ inferenceUpToDepth: maxDepth
 
 	| answers |
 	answers := self children
-		           probability: 1.0
+		           probability: 1
 		           depth: 0
 		           upToDepth: maxDepth
 		           down: true
