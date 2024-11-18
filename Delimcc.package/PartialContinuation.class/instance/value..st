@@ -9,7 +9,6 @@ value: anObject
 
 	topContext := self
 		              copy: self context
-		              to: nil
 		              bottomContextDo: [ :bc | bottomContext := bc ]. "copy the whole stack"
 
 	bottomContext swapSender: thisContext sender.
