@@ -9,6 +9,6 @@
 		"object",
 		"weight"
 	],
-	"name" : "HanseiProbabilityValue",
+	"name" : "DelimccWeightedValue",
 	"type" : "normal"
 }

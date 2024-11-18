@@ -2,7 +2,7 @@ exploring
 localProbability: pt probability: p depth: depth upToDepth: maxDepth down: down choices: rest answers: answers
 
 	| weightedValue |
-	weightedValue := HanseiProbabilityValue new
+	weightedValue := DelimccWeightedValue new
 		                 object: self;
 		                 weight: pt * p;
 		                 yourself.

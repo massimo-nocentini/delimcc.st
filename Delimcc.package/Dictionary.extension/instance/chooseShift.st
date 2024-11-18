@@ -9,7 +9,7 @@ chooseShift
 		  | node weightedValue |
 		  node := DelimccSearchTreeNode suspended: [ k value: each ].
 
-		  weightedValue := HanseiProbabilityValue new
+		  weightedValue := DelimccWeightedValue new
 			                   object: node;
 			                   weight: weight;
 			                   yourself.

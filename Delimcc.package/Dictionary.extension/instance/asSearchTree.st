@@ -8,7 +8,7 @@ asSearchTree
 		| node weightedValue |
 		node := DelimccSearchTreeNode valued: each.
 
-		weightedValue := HanseiProbabilityValue new
+		weightedValue := DelimccWeightedValue new
 			                 object: node;
 			                 weight: weight;
 			                 yourself.

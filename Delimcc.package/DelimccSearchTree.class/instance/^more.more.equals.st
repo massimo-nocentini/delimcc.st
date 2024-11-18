@@ -6,7 +6,7 @@ monad
 
 	self children do: [ :each |
 		| node |
-		node := HanseiProbabilityValue new
+		node := DelimccWeightedValue new
 			        object: each object >>= aBlock;
 			        weight: each weight;
 			        yourself.

@@ -8,7 +8,7 @@ reflect: k
 		| node v |
 		v := each object reflect: k.
 		
-		node := HanseiProbabilityValue new
+		node := DelimccWeightedValue new
 			        object: v;
 			        weight: each weight;
 			        yourself.
