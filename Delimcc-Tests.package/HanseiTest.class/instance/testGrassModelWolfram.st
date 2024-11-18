@@ -24,10 +24,11 @@ testGrassModelWolfram
 	values := pair first.
 
 	self
-		assert: (values at: true) simplify asMathematicaPrintString
-		equals:
-			'Times[r, Plus[Times[g, Plus[-1, Times[f, s]], Plus[-1, u]], u, Times[f, Plus[s, Times[-1, s, u]]]]]';
-		assert: (values at: false) simplify asMathematicaPrintString
-		equals:
-			'Times[Plus[-1, r], Plus[Times[f, s, Plus[-1, u]], Times[-1, u]]]';
-		assert: pair second size equals: 0
+		assert: (values at: true) simplify asString
+		equals: 'r (g (-1 + f s) (-1 + u) + u + f (s - s u))'.
+
+	self
+		assert: (values at: false) simplify asString
+		equals: '(-1 + r) (f s (-1 + u) - u)'.
+
+	self assert: pair second size equals: 0
