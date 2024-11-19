@@ -1,11 +1,13 @@
 {
-	"commentStamp" : "",
-	"super" : "TestCase",
-	"category" : "Delimcc-Tests",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "THanseiTestCase classTrait",
 	"classvars" : [ ],
 	"instvars" : [ ],
 	"name" : "HanseiTest",
-	"type" : "normal"
+	"commentStamp" : "",
+	"super" : "TestCase",
+	"traitcomposition" : "THanseiTestCase",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Delimcc-Tests"
 }

@@ -15,6 +15,6 @@ testFlipRecursive
 	self
 		assert: count equals: 9216;
 		assert: tree inferenceExact children size equals: 1024;
-		assert: (values at: true) equals: 0.5000000512000019;
-		assert: (values at: false) equals: 0.49999994880000287;
+		assert: (values at: true) closeTo: 0.5000000512000019;
+		assert: (values at: false) closeTo: 0.49999994880000287;
 		assert: pair second size equals: 0

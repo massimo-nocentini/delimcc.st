@@ -1,4 +1,4 @@
-tests
+model - drunk
 drunkCoin: n drunkProb: dp lostProb: lp
 
 	| drunk |

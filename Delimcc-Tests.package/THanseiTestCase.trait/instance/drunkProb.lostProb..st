@@ -1,4 +1,4 @@
-tests
+model - drunk
 drunkProb: dp lostProb: lp
 
 	| lost |
