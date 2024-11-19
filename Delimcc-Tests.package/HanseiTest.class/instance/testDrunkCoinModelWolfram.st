@@ -1,10 +1,14 @@
 tests
-testDrunkCoinModel
+testDrunkCoinModelWolfram
 
-	| tree values pair |
+	| tree values pair we dl dp |
+	we := WolframEngine link.
+	dl := we symbol: #l.
+	dp := we symbol: #d.
+
 	tree := [
 	        | rain |
-	        rain := self drunkCoin: 10 drunkProb: 0.5 lostProb: 0.9 ]
+	        rain := self drunkCoin: 10 drunkProb: dp lostProb: dl ]
 		        hansei.
 
 	pair := tree inferenceExact asValuesDictionary.
