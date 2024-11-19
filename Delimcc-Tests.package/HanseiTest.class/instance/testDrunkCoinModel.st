@@ -2,10 +2,7 @@ tests
 testDrunkCoinModel
 
 	| tree values pair |
-	tree := [
-	        | rain |
-	        rain := self drunkCoin: 10 drunkProb: 0.5 lostProb: 0.9 ]
-		        hansei.
+	tree := [ self drunkCoin: 10 drunkProb: 0.5 lostProb: 0.9 ] hansei.
 
 	pair := tree inferenceExact asValuesDictionary.
 	values := pair first.

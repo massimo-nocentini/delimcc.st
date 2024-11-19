@@ -7,10 +7,7 @@ testXandY
 	        p := 0.6.
 	        x := true bernoulli: p.
 	        y := true bernoulli: p.
-	        x | y when: [
-		        {
-			        x.
-			        y } ] ] hansei.
+	        x | y when: [ Array with: x with: y ] ] hansei.
 
 	pair := tree inferenceExact asValuesDictionary.
 	values := pair first.

@@ -1,13 +1,12 @@
 tests
 testFlipRecursiveReflect
 
-	| tree values pair p count |
-	p := 0.6.
+	| tree values pair count |
 	count := 0.
 
 	tree := [
 	        self
-		        reflectFlip: p
+		        reflectFlip: 0.6
 		        remaining: 10
 		        countBlock: [ count := count + 1 ] ] hansei.
 

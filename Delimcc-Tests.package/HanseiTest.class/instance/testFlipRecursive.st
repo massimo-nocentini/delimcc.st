@@ -1,13 +1,14 @@
 tests
 testFlipRecursive
 
-	| tree values pair p count |
-	p := 0.6.
+	| tree values pair count |
 	count := 0.
 
 	tree := [
-	        self flip: p remaining: 10 countBlock: [ count := count + 1 ] ]
-		        hansei.
+	        self
+		        flip: 0.6
+		        remaining: 10
+		        countBlock: [ count := count + 1 ] ] hansei.
 
 	pair := tree inferenceExact asValuesDictionary.
 	values := pair first.
