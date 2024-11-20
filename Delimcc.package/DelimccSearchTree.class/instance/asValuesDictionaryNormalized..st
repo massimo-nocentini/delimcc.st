@@ -4,7 +4,7 @@ asValuesDictionaryNormalized: normalized
 	| values cumulated suspended |
 	suspended := Dictionary new.
 	values := Dictionary new.
-	cumulated := 0.0.
+	cumulated := 0.
 
 	self children do: [ :weightedValue |
 		| w |
