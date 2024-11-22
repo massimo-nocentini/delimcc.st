@@ -16,10 +16,9 @@ asValuesDictionaryNormalized: normalized
 			weight: w ].
 
 	normalized ifTrue: [
-		values keysAndValuesDo: [ :k :v |
-			values at: k put: (v / cumulated) asFloat ].
+		values keysAndValuesDo: [ :k :v | values at: k put: v / cumulated ].
 
 		suspended keysAndValuesDo: [ :k :v |
-			suspended at: k put: (v / cumulated) asFloat ] ].
+			suspended at: k put: v / cumulated ] ].
 
 	^ Array with: values with: suspended
