@@ -5,7 +5,7 @@ Load with:
 ```smalltalk
 Metacello new
     baseline: 'Delimcc';
-    repository: 'github://massimo-nocentini/delimcc.st';
+    repository: 'github://massimo-nocentini/delimcc.st:master';
     load
 ```
 
