@@ -6,7 +6,7 @@ unwind
 	template ifNotNil: [ ^ self ].
 	top := from.
 	from := nil.
-	"No send since template was tested, as in #framesForShot."
+	"No send since template was tested, as in #framesForShot, which gives my contexts back in the same way."
 	top ifNil: [ ^ self ].
-	template := DelimccSliceCopier templateOf: (self framesFrom: top upTo: nil).
+	[ template := DelimccSliceCopier templateOf: (self framesFrom: top upTo: nil) ] ifCurtailed: [ template ifNil: [ from := top ] ].
 	top unwindTo: nil
