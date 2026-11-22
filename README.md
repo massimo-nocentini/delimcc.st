@@ -17,6 +17,8 @@ This project demonstrates an implementation of the shift/reset control operators
 
 `reset` marks the call stack with a `DelimccPrompt>>#delimit:` context that `shift` finds by walking the senders, and `DelimitedDynamicVariable>>#dlet:in:` does the same with a `DelimitedDynamicVariableRef`: no exception is signalled, so handlers such as `on: Exception do:` inside a `reset` or a `dlet:in:` do not interfere.
 
+These marks replaced the exception-based machinery, which is gone: `DelimitedControlException`, `BlockClosure>>#resetContext:` and `PartialContinuation>>#copy:bottomContextDo:` were removed, and `DelimitedDynamicVariableRef` is no longer a `Notification`, so it has no `dynVar:`, `hasValue` or `handles:`, and `[ p dref ] on: p do: [ :e | ... ]` no longer intercepts the lookup of `p`.
+
 ## Attribution
 The work is by 	Frank Shearar and	Levente Uzonyi, I just loaded in Pharo and did a little fix to make tests green.
 
