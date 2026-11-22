@@ -5,6 +5,8 @@ I am a prompt of the multi-prompt core of delimited control of Dybvig, Peyton Jo
 - k pushSubCont: aBlock is pushSubCont, and k value: x is k pushSubCont: [ x ].
 - p isDelimiting is is_prompt_set of Kiselyov's delimcc.
 
+The operators of the literature are derived from the same capture, with the names that they have in Kiselyov's delimcc: p shift: (Danvy and Filinski), p shift0:, p control: (Felleisen), p control0: (withSubCont:) and p abort:. k of shift: and shift0: ends with my delimiter, so each invocation of k is delimited again; k of control: and control0: does not. The block of shift: and control: is delimited by me; the block of shift0: and control0: is not.
+
 #delimiterFrom: finds the nearest delimiter of mine by walking the senders and comparing the receiver by identity and the selector, not the method, so that recompiling #delimit: does not invalidate the continuations captured before. No exception is signalled to find a delimiter, so no handler between a capture and its delimiter, however generic (on: Exception do:, on: Notification do:), can intercept it. A capture without a delimiter signals MissingResetException, which names me, and changes nothing.
 
-BlockClosure>>#reset delimits with the prompt that my class answers to #reset.
+BlockClosure>>#reset delimits with the prompt that my class answers to #reset, and BlockClosure>>#shift is its shift0: (not its shift:, a legacy name that Hansei relies on).
