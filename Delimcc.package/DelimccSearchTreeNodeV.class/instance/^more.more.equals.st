@@ -1,4 +1,5 @@
 monad
 >>= aBlock
 
-	^ self class suspended: [ aBlock value: self slot ]
+	^ self class suspended: [
+		  aBlock cull: self slot cull: DelimccSearchTree new ]

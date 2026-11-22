@@ -1,4 +1,4 @@
 monad
 fail: aString
 
-	Error signal: aString
+	^ self class new
