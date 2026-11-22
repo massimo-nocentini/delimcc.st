@@ -6,4 +6,4 @@ So the temporaries of my contexts are copied with them at each invocation, as th
 
 callcc makes me from a copy of contexts that go on running (#prompt:copying:upTo:): my first invocation makes my template from that copy, re-pointing the references to the running contexts, and every invocation runs a fresh copy of it. These copies share the temp vectors of the running contexts, as callcc in Scheme shares the variables.
 
-A capture runs no unwind block, and neither does a continuation that is never invoked; each invocation that completes or is unwound runs the ensure: and ifCurtailed: blocks of its own contexts once, as delimcc does.
+A capture runs no unwind block, and neither does a continuation that is never invoked; each invocation that completes or is unwound runs the ensure: and ifCurtailed: blocks of its own contexts once, as delimcc does. #unwind runs those of a continuation that has never been invoked and never will be, such as an abandoned generator.
