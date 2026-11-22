@@ -2,4 +2,6 @@ initialization
 initialize
 
 	super initialize.
-	sharesTempVectors := false
+	sharesTempVectors := false.
+	misordered := false.
+	closureScans := 0

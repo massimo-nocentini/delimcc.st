@@ -16,7 +16,10 @@
 		"pending",
 		"current",
 		"currentVectors",
-		"sharesTempVectors"
+		"sharesTempVectors",
+		"shared",
+		"misordered",
+		"closureScans"
 	],
 	"name" : "DelimccSliceCopier",
 	"type" : "normal"
