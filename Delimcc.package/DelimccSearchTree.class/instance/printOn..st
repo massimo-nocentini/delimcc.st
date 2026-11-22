@@ -7,10 +7,9 @@ printOn: aStream
 	aStream << 'a SearchTree(values distribution {'.
 
 	pair first keysAndValuesDo: [ :each :p |
-		aStream << ' ('.
-
-		each printOn: aStream.
 		aStream
+			<< ' (';
+			<< each printString;
 			<< ' ~ ';
 			<< (p printShowingDecimalPlaces: 3);
 			<< ')' ].
