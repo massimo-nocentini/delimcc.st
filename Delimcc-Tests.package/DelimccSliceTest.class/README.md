@@ -9,4 +9,4 @@ Each rule of DelimccSliceCopier has a test of protocol 'tests - rules' whose pro
 
 The tests of protocol 'tests - callcc' re-enter the continuations of callcc, whose copies DelimccSliceCopier fixes too (review-control F1a and F1x); those of 'tests - debugger' run the probes with the simulator of Context, and step them into every send and over a capture, as the debugger does; #unwind is in 'tests - ensure'.
 
-The limits are pinned too: a closure that a heap object holds is not re-pointed (testClosureHeldByAHeapObject), and a temporary of the slice that the first invocation assigns is not seen by the later ones (testAssignmentOfAFirstShotIsNotSeenByTheNext).
+The limits are pinned too: a closure that a heap object holds is not re-pointed (testClosureHeldByAHeapObject), a temporary of the slice that the first invocation assigns is not seen by the later ones (testAssignmentOfAFirstShotIsNotSeenByTheNext), and the temporaries of a loop body that has ended are shared (testTempsOfAScopeThatHasEndedAreShared).
