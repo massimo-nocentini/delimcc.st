@@ -1,15 +1,15 @@
 evaluating
 value: anObject
-	"Copy the contexts of the continuation and stitch them onto the current call 
-	stack by telling the bottom context that thisContext's sender called it. 
+	"Copy the contexts of the continuation and stitch them onto the current call
+	stack by telling the bottom context that thisContext's sender called it.
 	'thisContext sender' because thisContext refers to the context of the #value: call."
 
 	| topContext bottomContext |
-	bottomContext := nil.
+	topContext := self context. "copy the whole stack, once"
 
-	topContext := self
-		              copy: self context
-		              bottomContextDo: [ :bc | bottomContext := bc ]. "copy the whole stack"
+	bottomContext := topContext.
+	[ bottomContext sender isNil ] whileFalse: [
+		bottomContext := bottomContext sender ].
 
 	bottomContext swapSender: thisContext sender.
 	"Tell thisContext that its sender was actually the last/top-most context."
