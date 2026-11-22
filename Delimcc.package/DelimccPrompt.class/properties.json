@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Delimcc-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
+		"Reset"
+	],
+	"instvars" : [ ],
+	"name" : "DelimccPrompt",
+	"type" : "normal"
+}

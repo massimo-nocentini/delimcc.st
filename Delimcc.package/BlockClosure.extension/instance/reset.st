@@ -1,7 +1,5 @@
 *Delimcc
 reset
+	"Delimit the continuations that #shift captures while I am evaluated."
 
-	| context |
-	context := thisContext.
-
-	^ self resetContext: context
+	^ DelimccPrompt reset delimit: self

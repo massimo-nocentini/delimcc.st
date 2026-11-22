@@ -1,10 +1,11 @@
 testing
 testShiftPreservesResetMarker
-	| cc result |
+	| cc |
 	[1 + [:k | cc := k. k value: 2] shift] reset.
-	self assert: (cc stack last method selector ~= #reset) description: 'Partial continuation cut too far, eating the reset'.
-	self assert: (cc stack last method selector ~= #on:do:) description: 'Partial continuation cut too far, eating the marker context'.
+	self assert: cc stack last method equals: DelimccPrompt >> #delimit:.
+	self assert: cc stack last receiver identicalTo: DelimccPrompt reset.
+	self deny: ((cc stack collect: [ :each | each method selector ]) includes: #reset) description: 'Partial continuation cut too far, eating the reset'.
 
-	"From Chung-chieh Shan's 'Shift to control': (reset (cons 'a (reset (shift f (shift g '())))))"
-	result := [ 'a' , [[:f | [:g| g value: 'b'] shift ] shift] reset ] reset.
-	self assert: 'ab' = result.
+	"k holds the delimiter, so a shift inside an invocation of k stops there."
+	cc := [ 1 + [ :k | k ] shift + [ :k | 100 ] shift ] reset.
+	self assert: (cc value: 2) equals: 100

@@ -1,29 +1,20 @@
 *Delimcc
 shift
-	"Cut contexts off the call stack down to (but not including) the nearest #reset, and reify this partial continuation as a function. Then, pass this function to aUnaryBlock."
+	"Cut the contexts off the call stack down to, and including, the nearest #reset, reify them as a PartialContinuation k and evaluate me with k on what is left of the stack.
 
-	| cc currentCtxt fun resetCtxt |
-	resetCtxt := DelimitedControlException signal ifNil: [
-		             ^ MissingResetException signal ].
+k holds the delimiter, so each invocation of k is delimited again, but I am evaluated without it: this is shift0, not the shift of Danvy and Filinski. For example, [ 'a', [ [ :f | [ :g | '' ] shift ] shift ] reset ] reset answers '', where shift would answer 'a'. Hansei relies on it.
 
+The delimiter is found by walking the senders (see DelimccPrompt), so the exception handlers between me and the #reset do not see me. Signal MissingResetException when there is no #reset."
 
-	"resetCtxt is not where we want to cut. Because we use #on:do: to mark the stack, 
-	rather than marking the reset's context directly, it's the marked context that we 
-	want to leave on the stack. We need to cut to the context whose sender is resetCtxt."
+	| delimiter k |
+	delimiter := (DelimccPrompt reset delimiterFrom: thisContext sender)
+		             ifNil: [ ^ MissingResetException signal ].
 
-	currentCtxt := thisContext.
+	k := PartialContinuation new
+		     from: thisContext sender downTo: delimiter sender;
+		     yourself.
 
-	cc := currentCtxt findContextSuchThat: [ :each |
-		      each numTemps = 1 and: [ (each tempAt: 1) == resetCtxt ] ].
+	"Return to the sender of the delimiter, the context of #reset."
+	thisContext swapSender: delimiter sender.
 
-	cc := cc sender.
-
-	"Store the stack from _below_ the shift to just _below_ the reset marker."
-	fun := PartialContinuation new
-		       from: currentCtxt sender downTo: cc;
-		       yourself.
-
-	"Throw away the stack down to just _above_ the reset marker."
-	currentCtxt swapSender: cc.
-
-	^ self value: fun
+	^ self value: k

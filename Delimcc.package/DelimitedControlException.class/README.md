@@ -1,1 +1,0 @@
-I mark a context so that a shift further up the stack will unwind only to me. In other words, use me to delimit a continuation.

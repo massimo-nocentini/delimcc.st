@@ -1,0 +1,5 @@
+I tag a delimiter on the call stack. A block evaluated by my #delimit: runs delimited by me: the context of #delimit: is the delimiter, and #delimiterFrom: finds the nearest one of mine by walking the senders and comparing method and receiver by identity.
+
+No exception is signalled to find a delimiter, so no handler between a #shift and its #reset, however generic (on: Exception do:, on: Notification do:), can intercept it, and a missing delimiter is just nil.
+
+BlockClosure>>#reset delimits with the prompt that my class answers to #reset. Other instances are other prompts, independent of each other: they are the prompt tags of a multi-prompt core (newPrompt, pushPrompt, withSubCont, pushSubCont, after Dybvig, Peyton Jones and Sabry), which can be built on #delimit: and #delimiterFrom:.
