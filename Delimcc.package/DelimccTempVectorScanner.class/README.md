@@ -1,3 +1,3 @@
 I find the temporaries of a CompiledCode that hold the temp vectors that it creates. The compiler puts a temporary in a temp vector, an Array of its own, when a block captures it and either the block writes it or it is written after the capture; the method or block that declares it creates the vector with pushNewArray and stores it into a temporary at once. A brace array is created with pushConsArray instead, so a user Array never matches.
 
-DelimccSliceCopier asks me with #vectorSlotsOf:, which caches my answers by CompiledCode, weakly. I rely on the Sista V1 encoder of Pharo 12 to 15: another encoder may need another scanner.
+DelimccSliceCopier asks me with #vectorSlotsOf:, which caches my answers by CompiledCode in a table of 4096 entries: it holds the codes of its entries, so it keeps at most 4096 methods and blocks alive after they are replaced. I rely on the Sista V1 encoder of Pharo 12 to 15: another encoder may need another scanner.

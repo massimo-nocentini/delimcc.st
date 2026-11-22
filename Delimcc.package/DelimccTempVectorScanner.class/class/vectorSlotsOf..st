@@ -1,13 +1,11 @@
 accessing
 vectorSlotsOf: aCompiledCode
-	"Answer the indices of the temporaries in which aCompiledCode keeps the temp vectors that it creates. A miss installs a new cache, a copy of the old one, rather than changing the cache that another process may be reading."
+	"Answer the indices of the temporaries in which aCompiledCode keeps the temp vectors that it creates. The answers are cached in Entries, a table of 4096 entries indexed by identity hash, each entry a code and its answer: a miss replaces one entry with a single store, so a process that reads the table meanwhile finds the old entry or the new one, and the cost of a miss does not grow with the number of codes met."
 
-	| cache |
-	cache := Cache ifNil: [ WeakIdentityKeyDictionary new ].
-	^ cache at: aCompiledCode ifAbsent: [
-		  | slots |
-		  slots := self new scan: aCompiledCode.
-		  Cache := cache copy
-			           at: aCompiledCode put: slots;
-			           yourself.
-		  slots ]
+	| index entry slots |
+	index := (aCompiledCode identityHash bitAnd: 4095) + 1.
+	entry := (Entries ifNil: [ Entries := Array new: 4096 ]) at: index.
+	(entry notNil and: [ entry key == aCompiledCode ]) ifTrue: [ ^ entry value ].
+	slots := self new scan: aCompiledCode.
+	Entries at: index put: aCompiledCode -> slots.
+	^ slots

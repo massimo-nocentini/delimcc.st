@@ -5,7 +5,7 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [
-		"Cache"
+		"Entries"
 	],
 	"instvars" : [
 		"state"
