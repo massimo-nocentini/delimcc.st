@@ -11,3 +11,5 @@ A DelimitedDynamicVariable, on the other hand, permits #shift to close over PART
 For a deep investigation into the bad interactions between full dynamic variables and delimited continuations, see http://okmij.org/ftp/Computation/dynamic-binding.html#DDBinding
 
 A #dlet:in: binds its variable to a DelimitedDynamicVariableRef and marks the call stack with it; #dref and #dset: find the innermost binding by walking the senders, without signalling any exception. So no handler, however generic (on: Exception do:), can answer for a variable, and nil can be bound like any other value.
+
+The walk takes time in proportion to the frames between a #dref or a #dset: and the binding, or to all the frames when there is none. Up to some 10 to 25 frames it is as fast as the exception-based lookup it replaced, or faster, but the VM scanned for that one natively, so at 1000 frames the walk is 4 to 5 times slower.
