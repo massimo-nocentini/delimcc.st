@@ -1,1 +1,3 @@
-A Notification used to find the current value of a delimited dynamic variable. It contains a reference to the variable whose value it wishes to find. See DelimitedDynamicVariable >> #handle: for details.
+I am the binding of a DelimitedDynamicVariable in one extent of DelimitedDynamicVariable>>#dlet:in:, a mutable cell that #dref reads and #dset: writes.
+
+While the extent runs, the context of my #during: marks the call stack, and DelimitedDynamicVariable>>#bindingIfNone: finds the innermost one by walking the senders. A continuation captured inside the extent copies that context, not me, so all its invocations share me.

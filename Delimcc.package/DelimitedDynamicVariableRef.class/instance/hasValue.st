@@ -1,3 +1,0 @@
-testing
-hasValue
-	^ value ~= Unset.

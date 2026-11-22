@@ -1,12 +1,10 @@
 {
-	"commentStamp" : "fbs 6/27/2012 09:47",
-	"super" : "Notification",
+	"commentStamp" : "",
+	"super" : "Object",
 	"category" : "Delimcc-Support",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"classvars" : [
-		"Unset"
-	],
+	"classvars" : [ ],
 	"instvars" : [
 		"dynVar",
 		"value"
