@@ -8,7 +8,5 @@ unwind
 	from := nil.
 	"No send since template was tested, as in #framesForShot, which gives my contexts back in the same way."
 	top ifNil: [ ^ self ].
-	([
-	 frames := self withoutAbandonedSteppingGuards: (self framesFrom: top upTo: nil).
-	 self keep: (DelimccSliceCopier templateOf: frames) ] ifCurtailed: [ template ifNil: [ from := top ] ]) ifTrue: [
-		frames ifNotEmpty: [ frames first unwindTo: nil ] ]
+	([ self keep: (DelimccSliceCopier templateOf: (frames := self framesFrom: top upTo: nil)) ] ifCurtailed: [ template ifNil: [ from := top ] ])
+		ifTrue: [ (self withoutAbandonedSteppingGuards: frames) ifNotEmpty: [ :some | some first unwindTo: nil ] ]
