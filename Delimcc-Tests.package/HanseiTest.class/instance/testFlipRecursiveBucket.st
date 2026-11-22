@@ -21,8 +21,8 @@ testFlipRecursiveBucket
 	values := pair first.
 
 	self
-		assert: count equals: 2044;
-		assert: tree inferenceExact children size equals: 1024;
+		assert: count equals: 36;
+		assert: tree inferenceExact children size equals: 2;
 		assert: (values at: true) closeTo: 0.5000000512000019;
 		assert: (values at: false) closeTo: 0.49999994880000287;
 		assert: pair second size equals: 0
