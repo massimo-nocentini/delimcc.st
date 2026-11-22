@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "InstructionClient",
+	"category" : "Delimcc-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
+		"Cache"
+	],
+	"instvars" : [
+		"state"
+	],
+	"name" : "DelimccTempVectorScanner",
+	"type" : "normal"
+}

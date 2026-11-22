@@ -1,0 +1,1 @@
+I exercise the copies of a slice of the stack, the contexts of a PartialContinuation, that each invocation of the continuation runs: DelimccTempVectorScanner, DelimccSliceCopier and DelimccSliceTemplate.
