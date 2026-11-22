@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "DelimccSliceCopier",
+	"category" : "Delimcc-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"rule"
+	],
+	"name" : "DelimccAblatedSliceCopier",
+	"type" : "normal"
+}

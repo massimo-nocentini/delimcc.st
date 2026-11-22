@@ -3,15 +3,12 @@ codeOfClosure: aClosure
 	"R3: copy aClosure when its outer context (instance variable 1), its receiver (4) or one of its copied values (negative fields) has a copy."
 
 	| outer receiver values code |
-	(ablated == nil or: [ self applies: #closures ]) ifFalse: [ ^ 0 ].
 	originals == nil ifFalse: [ (self codeOf: aClosure) ifNotNil: [ :known | ^ known ] ].
 	outer := aClosure outerContext.
 	outer := outer == nil
 		         ifTrue: [ 0 ]
 		         ifFalse: [ self codeOfContext: outer ].
-	receiver := (ablated == nil or: [ self applies: #receivers ])
-		            ifTrue: [ aClosure receiver sliceCodeDelimcc: self ]
-		            ifFalse: [ 0 ].
+	receiver := self codeOfReceiver: aClosure receiver.
 	1 to: aClosure basicSize do: [ :i |
 		| value |
 		value := (aClosure basicAt: i) sliceCodeDelimcc: self.

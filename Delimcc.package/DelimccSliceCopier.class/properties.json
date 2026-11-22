@@ -4,9 +4,7 @@
 	"category" : "Delimcc-Core",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"classvars" : [
-		"Ablated"
-	],
+	"classvars" : [ ],
 	"instvars" : [
 		"frames",
 		"copies",
@@ -18,7 +16,7 @@
 		"pending",
 		"current",
 		"currentVectors",
-		"ablated"
+		"sharesTempVectors"
 	],
 	"name" : "DelimccSliceCopier",
 	"type" : "normal"

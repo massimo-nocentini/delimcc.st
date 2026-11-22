@@ -5,12 +5,10 @@ fixFrame: anIndex
 	| frame code |
 	frame := copies at: anIndex.
 	current := 0.
-	(ablated == nil or: [ self applies: #receivers ]) ifTrue: [
-		code := frame receiver sliceCodeDelimcc: self.
-		code = 0 ifFalse: [ self patch: 6 of: anIndex to: code ] ].
-	(ablated == nil or: [ self applies: #closureOrNil ]) ifTrue: [
-		code := frame closure sliceCodeDelimcc: self.
-		code = 0 ifFalse: [ self patch: 5 of: anIndex to: code ] ].
+	code := self codeOfReceiver: frame receiver.
+	code = 0 ifFalse: [ self patch: 6 of: anIndex to: code ].
+	code := self codeOfClosureOfFrame: frame closure.
+	code = 0 ifFalse: [ self patch: 5 of: anIndex to: code ].
 	current := anIndex.
 	currentVectors := nil.
 	1 to: frame stackPtr do: [ :slot |
