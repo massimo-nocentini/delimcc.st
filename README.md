@@ -91,7 +91,7 @@ log asArray
 ```
 
 ### callcc
-`[ :k | ... ] callcc` runs the block on the original stack, so the code around it keeps its non-local returns and its handlers. `k` is the rest of the computation up to the nearest `reset`: invoking it once `callcc` has answered replaces that `reset` with a copy of the rest. Unlike the continuations of `shift`, these copies share the temp vectors of the original contexts, as Scheme shares its variables, so the classic loop sees `kc` in each of them; a temporary that no block captures, such as `m`, is still copied.
+`[ :k | ... ] callcc` runs the block on the original stack, so the code around it keeps its non-local returns and its handlers. `k` is the rest of the computation up to the nearest `reset`: invoking it once `callcc` has answered replaces that `reset` with a copy of the rest. Unlike the continuations of `shift`, these copies share the temp vectors of the original contexts, as Scheme shares its variables, so the classic loop sees `kc` in each of them; a temporary that no block captures, such as `m`, is still copied. The copies hand on an exception whose handler called `callcc` as it was then, so `e pass`, `e signal` or `e outer` after the `callcc` reaches the copy of the same outer handler in each re-entry, even once the original has passed it.
 
 ```smalltalk
 [ | m kc | m := [ :k | kc := k. 0 ] callcc. m < 3 ifTrue: [ kc value: m + 1 ]. m ] reset
