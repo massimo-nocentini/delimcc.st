@@ -1,15 +1,14 @@
 *Delimcc
 hanseiSuspended
+	"Answer a search tree whose only branch suspends my whole model: nothing runs until the tree is explored."
 
-	^ [
-	  | node weightedValue |
-	  node := DelimccSearchTreeNode suspended: self value.
+	| weightedValue |
+	weightedValue := DelimccWeightedValue new
+		                 object:
+			                 (DelimccSearchTreeNode suspended: [ self hansei ]);
+		                 weight: 1;
+		                 yourself.
 
-	  weightedValue := DelimccWeightedValue new
-		                   object: node;
-		                   weight: 1;
-		                   yourself.
-
-	  DelimccSearchTree new
+	^ DelimccSearchTree new
 		  children: weightedValue ~~> nil;
-		  yourself ] reset
+		  yourself
