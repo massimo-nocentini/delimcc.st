@@ -15,4 +15,5 @@ baseline: spec
 				package: 'Delimcc'
 				with: [ spec requires: #( 'ContainersEssentials' 'ContainersCategory' ) ];
 				package: 'Delimcc-Tests'
-				with: [ spec requires: #( 'Delimcc' ) ] ]
+				with: [ spec requires: #( 'Delimcc' ) ];
+				package: 'Delimcc-Continuation' ]
