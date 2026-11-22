@@ -1,6 +1,6 @@
 copying
 leaveOutSteppingGuards
-	"Leave out of my copies the contexts that the debugger has inserted to step over a send (Context>>#isSteppingGuardDelimcc). They jump back into a debugging operation, which is over by the time a copy runs, so a copy must return through them as if they were not there. The contexts of the first invocation keep them."
+	"Leave out of my copies the contexts that the debugger has inserted to step over a send (Context>>#isSteppingGuardDelimcc). They jump back into a debugging operation, which is over by the time a copy runs, so a copy must return through them as if they were not there. The contexts of the first invocation keep them while their step goes on (PartialContinuation>>#withoutAbandonedSteppingGuards:)."
 
 	| kept |
 	1 to: copies size do: [ :i |

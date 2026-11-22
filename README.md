@@ -101,7 +101,7 @@ log asArray
 ### Limits
 - A closure that a heap object holds, such as a block in an instance variable, is not re-pointed: its `^` works in the first invocation only, and raises `BlockCannotReturn` in the later ones.
 - A temporary of `k` that one invocation assigns is not seen by the later ones, since each starts from the state of the first; share it through a heap object.
-- The debugger steps into and over captures and invocations, and the copies leave out the contexts that it inserts to step over a send.
+- The debugger steps into and over captures and invocations, and the copies leave out the contexts that it inserts to step over a send, as the first invocation does once that step cannot end, when k has escaped the capture.
 - Continuations are not serialisable: a materialised `k` holds a copy of its prompt, which the delimiters of the original prompt do not delimit.
 - The first invocation keeps a template of `k`, which costs about as much as copying its contexts once, so a shallow `k` invoked once or twice costs up to 1.5 times what one plain copy did, while a deep `k` invoked many times costs about half.
 

@@ -5,5 +5,6 @@ framesForFirstShotFrom: aContext
 	| frames |
 	frames := self framesFrom: aContext upTo: nil.
 	originals ifNotNil: [ ^ self instantiateCopies: frames ].
+	frames := self withoutAbandonedSteppingGuards: frames.
 	(self keep: (DelimccSliceCopier templateOf: frames)) ifFalse: [ ^ template instantiate ].
 	^ frames
