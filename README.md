@@ -74,7 +74,7 @@ cell := Array with: 0.
 ```
 
 ### ensure: and ifCurtailed:
-They follow delimcc, not the dynamic-wind of Racket: a capture or an abort runs no unwind block, and neither does a `k` that is never invoked; each invocation that completes runs the `ensure:` blocks of its own contexts once, and an invocation that is unwound runs its `ifCurtailed:` blocks. `k unwind` runs the unwind blocks of a `k` that has never been invoked and never will be, such as an abandoned generator, and does nothing once `k` has been invoked.
+They follow delimcc, not the dynamic-wind of Racket: a capture or an abort runs no unwind block, and neither does a `k` that is never invoked; each invocation that completes runs the `ensure:` blocks of its own contexts once, and an invocation that is unwound runs its `ifCurtailed:` blocks. `k unwind` runs the unwind blocks of a `k` that has never been invoked and never will be, such as an abandoned generator, and does nothing once `k` has been invoked. It takes the place of the first invocation, so `k` stays invocable: a later invocation runs a fresh copy, as any invocation after the first does, on the state that the unwind blocks have left, such as a closed stream.
 
 ```smalltalk
 | log k |
