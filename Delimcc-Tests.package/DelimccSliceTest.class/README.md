@@ -1,11 +1,6 @@
 I exercise the slices of the stack that a PartialContinuation runs: its own contexts at the first invocation, fresh copies from its DelimccSliceTemplate afterwards, made by DelimccSliceCopier, with the temp vectors that DelimccTempVectorScanner finds. Most probes are those of review #1 (a ^ in a block of the slice) and #2 (a shift inside an exception handler), ported from the experiments of the proto-multiprompt branch, and run isolated, as they ended the run before.
 
-Each rule of DelimccSliceCopier has a test of protocol 'tests - rules' whose probe gives the right answer with DelimccSliceCopier and a wrong one with a DelimccAblatedSliceCopier without that rule; the probe makes the template of its continuation before the first invocation, so every invocation runs copies. With the rule off for the whole suite, the prototype also failed:
-- R2, receivers: testShiftInsideAHandler, testHandlerSliceAfterItsReset, testHandlerSliceInOtherProcesses, testRetryAfterReentry;
-- R2, closures of the contexts: testNonLocalReturnFromEachShot, testNonLocalReturnFromKAfterItsReset, testAnySatisfyOfThreeShots, testThousandShotsOfNonLocalReturns, testDeepSliceOfNonLocalReturns, testEnsureOncePerShot, testHanseiModelWithDetect, testProcesses;
-- R3, closures: the same, plus testDetectIfNoneOfTwoShots, testSliceClosureCapturedByAReturnedMethod and testRetryAfterReentry;
-- R4, exceptions: testResumeAndReturnInAHandlerSlice, testPassAndOuterAfterReentry, testRetryAfterReentry, testErrorOfASecondShotInsideTheSlice, testErrorOfASecondShotOutsideTheSlice;
-- R5, temp vectors: testTempsArePerShot, testTempsWrittenByABlockArePerShot, testAssignmentOfAFirstShotIsNotSeenByTheNext, testRetryAfterReentry.
+Each rule of DelimccSliceCopier has a test of protocol 'tests - rules' whose probe gives the right answer with DelimccSliceCopier and a wrong one with a DelimccAblatedSliceCopier without that rule; the probe makes the template of its continuation before the first invocation, so every invocation runs copies. These are the guards of the rules: with a rule off for the whole suite, many other probes fail too, among them those of callcc, of the debugger and the examples of the README.
 
 The tests of protocol 'tests - callcc' re-enter the continuations of callcc, whose copies DelimccSliceCopier fixes too (review-control F1a and F1x); those of 'tests - debugger' run the probes with the simulator of Context, and step them into every send and over a capture, as the debugger does; #unwind is in 'tests - ensure'.
 
