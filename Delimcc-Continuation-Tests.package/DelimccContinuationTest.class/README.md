@@ -1,0 +1,5 @@
+I test the methods that Delimcc-Continuation installs on Pharo's Continuation, and the extension methods of Delimcc-Continuation-Tests on ContinuationTest and TwoInARowStar.
+
+The tests in 'tests - fixes' fail on a stock image, where Continuation>>#value: cuts the whole stack, without running any unwind block, before it restores the captured one: some of them even kill the process that runs them there. The tests in 'tests - api' exercise the methods that ContinuationTest never runs. The tests in 'tests - limits' pin what the package leaves as it is, and the README documents: re-entering a frame runs its captured ensure: blocks again, Exception objects are not part of the snapshot, and whether a temporary is rolled back depends on the temp vectors the compiler chooses. If one of them fails, the semantics changed: update the README.
+
+Every test asserts something that a value: that does not jump would get wrong, and records in my instance variables, not in temporaries, what has to survive a jump.

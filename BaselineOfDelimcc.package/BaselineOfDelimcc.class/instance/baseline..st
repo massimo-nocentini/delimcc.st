@@ -16,4 +16,10 @@ baseline: spec
 				with: [ spec requires: #( 'ContainersEssentials' 'ContainersCategory' ) ];
 				package: 'Delimcc-Tests'
 				with: [ spec requires: #( 'Delimcc' ) ];
-				package: 'Delimcc-Continuation' ]
+				package: 'Delimcc-Continuation';
+				package: 'Delimcc-Continuation-Tests'
+				with: [ spec requires: #( 'Delimcc-Continuation' ) ].
+
+			spec
+				group: 'Continuation'
+				with: #( 'Delimcc-Continuation' 'Delimcc-Continuation-Tests' ) ]
