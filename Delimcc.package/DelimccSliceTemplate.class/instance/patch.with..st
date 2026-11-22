@@ -9,13 +9,13 @@ patch: someContexts with: someObjects
 		target := patches at: i + 2.
 		target := target > 0
 			          ifTrue: [ someContexts at: target ]
-			          ifFalse: [ someObjects at: target negated ].
+			          ifFalse: [ someObjects at: 0 - target ].
 		holder > 0
 			ifTrue: [
 				field > 0
 					ifTrue: [ (someContexts at: holder) instVarAt: field put: target ]
-					ifFalse: [ (someContexts at: holder) at: field negated put: target ] ]
+					ifFalse: [ (someContexts at: holder) at: 0 - field put: target ] ]
 			ifFalse: [
 				field > 0
-					ifTrue: [ (someObjects at: holder negated) instVarAt: field put: target ]
-					ifFalse: [ (someObjects at: holder negated) basicAt: field negated put: target ] ] ]
+					ifTrue: [ (someObjects at: 0 - holder) instVarAt: field put: target ]
+					ifFalse: [ (someObjects at: 0 - holder) basicAt: 0 - field put: target ] ] ]

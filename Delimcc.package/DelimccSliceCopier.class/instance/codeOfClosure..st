@@ -4,7 +4,7 @@ codeOfClosure: aClosure
 
 	| outer receiver values code |
 	(ablated == nil or: [ self applies: #closures ]) ifFalse: [ ^ 0 ].
-	codes == nil ifFalse: [ (codes at: aClosure ifAbsent: nil) ifNotNil: [ :known | ^ known ] ].
+	originals == nil ifFalse: [ (self codeOf: aClosure) ifNotNil: [ :known | ^ known ] ].
 	outer := aClosure outerContext.
 	outer := outer == nil
 		         ifTrue: [ 0 ]
@@ -21,5 +21,5 @@ codeOfClosure: aClosure
 	outer = 0 ifFalse: [ self patch: 1 of: code to: outer ].
 	receiver = 0 ifFalse: [ self patch: 4 of: code to: receiver ].
 	values ifNotNil: [
-		values doWithIndex: [ :each :i | each = 0 ifFalse: [ self patch: i negated of: code to: each ] ] ].
+		1 to: values size do: [ :i | (values at: i) = 0 ifFalse: [ self patch: 0 - i of: code to: (values at: i) ] ] ].
 	^ code

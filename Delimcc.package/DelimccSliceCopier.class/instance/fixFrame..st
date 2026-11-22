@@ -1,17 +1,18 @@
 copying
 fixFrame: anIndex
-	"Record the patches of the context at anIndex: its receiver (instance variable 6), its closure (5) and its stack slots (negative fields). They are read in its copy, which holds the same objects but is faster to read than the context, which the VM may still check against its frame, and with the accessors rather than instVarAt:, for the same reason."
+	"Record the patches of the context at anIndex: its receiver (instance variable 6), its closure (5) and its stack slots (negative fields). They are read in its copy, which holds the same objects but is faster to read than the context, which the VM may still check against its frame, and with the accessors rather than instVarAt:, for the same reason. A temp vector is never a receiver or a closure, so the frame is current for its slots only."
 
 	| frame code |
 	frame := copies at: anIndex.
-	current := anIndex.
-	currentVectors := nil.
+	current := 0.
 	(ablated == nil or: [ self applies: #receivers ]) ifTrue: [
 		code := frame receiver sliceCodeDelimcc: self.
 		code = 0 ifFalse: [ self patch: 6 of: anIndex to: code ] ].
 	(ablated == nil or: [ self applies: #closureOrNil ]) ifTrue: [
 		code := frame closure sliceCodeDelimcc: self.
 		code = 0 ifFalse: [ self patch: 5 of: anIndex to: code ] ].
+	current := anIndex.
+	currentVectors := nil.
 	1 to: frame stackPtr do: [ :slot |
 		code := (frame at: slot) sliceCodeDelimcc: self.
-		code = 0 ifFalse: [ self patch: slot negated of: anIndex to: code ] ]
+		code = 0 ifFalse: [ self patch: 0 - slot of: anIndex to: code ] ]

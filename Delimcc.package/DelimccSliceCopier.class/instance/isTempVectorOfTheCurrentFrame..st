@@ -1,7 +1,11 @@
 private
 isTempVectorOfTheCurrentFrame: anArray
 
-	| frame |
+	| frame slots |
 	frame := copies at: current.
-	^ (currentVectors ifNil: [ currentVectors := DelimccTempVectorScanner vectorSlotsOf: frame method ])
-		  anySatisfy: [ :slot | slot <= frame stackPtr and: [ (frame at: slot) == anArray ] ]
+	slots := currentVectors ifNil: [ currentVectors := DelimccTempVectorScanner vectorSlotsOf: frame method ].
+	1 to: slots size do: [ :i |
+		| slot |
+		slot := slots at: i.
+		(slot <= frame stackPtr and: [ (frame at: slot) == anArray ]) ifTrue: [ ^ true ] ].
+	^ false

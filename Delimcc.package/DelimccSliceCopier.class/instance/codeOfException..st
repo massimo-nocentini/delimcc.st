@@ -4,11 +4,8 @@ codeOfException: anException
 
 	| code |
 	(ablated == nil or: [ self applies: #exceptions ]) ifFalse: [ ^ 0 ].
-	codes == nil ifFalse: [ (codes at: anException ifAbsent: nil) ifNotNil: [ :known | ^ known ] ].
-	((1 to: anException class instSize) anySatisfy: [ :i |
-		 | value |
-		 value := anException instVarAt: i.
-		 value isContext and: [ (self codeOfContext: value) > 0 ] ]) ifFalse: [ ^ 0 ].
+	originals == nil ifFalse: [ (self codeOf: anException) ifNotNil: [ :known | ^ known ] ].
+	(self refersToAFrame: anException) ifFalse: [ ^ 0 ].
 	code := self register: anException.
 	(pending ifNil: [ pending := OrderedCollection new ]) add: code.
 	^ code

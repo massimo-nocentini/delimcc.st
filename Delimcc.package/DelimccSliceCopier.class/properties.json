@@ -10,6 +10,7 @@
 	"instvars" : [
 		"frames",
 		"copies",
+		"originals",
 		"objects",
 		"codes",
 		"frameIndexes",
