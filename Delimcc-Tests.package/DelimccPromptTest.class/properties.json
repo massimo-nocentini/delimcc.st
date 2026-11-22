@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "TestCase",
+	"super" : "DelimccTestCase",
 	"category" : "Delimcc-Tests",
 	"classinstvars" : [ ],
 	"pools" : [ ],
@@ -8,9 +8,7 @@
 	"instvars" : [
 		"p",
 		"q",
-		"log",
-		"outcome",
-		"isolation"
+		"log"
 	],
 	"name" : "DelimccPromptTest",
 	"type" : "normal"

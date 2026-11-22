@@ -1,11 +1,14 @@
 {
 	"commentStamp" : "",
-	"super" : "TestCase",
+	"super" : "DelimccTestCase",
 	"category" : "Delimcc-Tests",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"log",
+		"held"
+	],
 	"name" : "DelimccSliceTest",
 	"type" : "normal"
 }

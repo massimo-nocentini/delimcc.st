@@ -1,6 +1,6 @@
-tests - expected failures
+tests - copies
 testShiftInsideAHandlerResumesItsCopies
-	"Review #2: the copies of the handler return through the exception, whose handler context is the original on:do:."
+	"Review #2: the second invocation returns through its copy of the exception, whose handler context is its copy of the on:do: context."
 
 	self
 		assert: (self isolated: [

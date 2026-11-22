@@ -1,4 +1,4 @@
-tests - expected failures
+tests - copies
 testNonLocalReturnFromKInAnySatisfy
 
 	self

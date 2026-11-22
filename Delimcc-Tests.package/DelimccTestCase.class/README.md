@@ -1,0 +1,1 @@
+I am the abstract superclass of the tests that resume continuations in ways that went wrong before the copies of a slice were fixed up (review #1 and #2): #isolated: runs such a block in a process of its own, whose error handler is the test, so that a continuation that leaves through contexts that no handler of the caller sees ends that process, not the run.

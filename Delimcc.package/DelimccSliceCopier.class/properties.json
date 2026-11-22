@@ -1,0 +1,24 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Delimcc-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
+		"Ablated"
+	],
+	"instvars" : [
+		"frames",
+		"copies",
+		"objects",
+		"codes",
+		"frameIndexes",
+		"patches",
+		"pending",
+		"current",
+		"currentVectors",
+		"ablated"
+	],
+	"name" : "DelimccSliceCopier",
+	"type" : "normal"
+}
