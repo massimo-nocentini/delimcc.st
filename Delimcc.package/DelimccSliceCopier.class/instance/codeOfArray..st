@@ -7,7 +7,7 @@ codeOfArray: anArray
 	originals == nil ifFalse: [ (self codeOf: anArray) ifNotNil: [ :known | ^ known ] ].
 	current = 0 ifTrue: [ ^ 0 ].
 	(self isTempVectorOfTheCurrentFrame: anArray) ifFalse: [ ^ self shared: anArray ].
-	(shared notNil and: [ shared includes: anArray ]) ifTrue: [ misordered := true ].
+	(self isShared: anArray) ifTrue: [ misordered := true ].
 	code := self register: anArray.
 	(pending ifNil: [ pending := OrderedCollection new ]) add: code.
 	^ code

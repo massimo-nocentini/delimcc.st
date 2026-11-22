@@ -8,7 +8,7 @@ codeOfClosure: aClosure
 	outer := outer == nil
 		         ifTrue: [ 0 ]
 		         ifFalse: [ self codeOfContext: outer ].
-	(outer = 0 and: [ shared notNil and: [ shared includes: aClosure ] ]) ifTrue: [ ^ 0 ].
+	(outer = 0 and: [ self isShared: aClosure ]) ifTrue: [ ^ 0 ].
 	scans := closureScans := closureScans + 1.
 	receiver := self codeOfReceiver: aClosure receiver.
 	1 to: aClosure basicSize do: [ :i |

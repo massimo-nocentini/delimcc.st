@@ -18,6 +18,7 @@
 		"currentVectors",
 		"sharesTempVectors",
 		"shared",
+		"lastShared",
 		"misordered",
 		"closureScans"
 	],
