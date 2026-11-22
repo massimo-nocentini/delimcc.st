@@ -13,6 +13,7 @@ testXandY
 	values := pair first.
 
 	self
+		assert: values size equals: 3;
 		assert: (values at: { true. true }) equals: 0.36;
 		assert: (values at: { true. false }) equals: 0.24;
 		assert: (values at: { false. true }) equals: 0.24;
