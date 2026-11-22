@@ -54,7 +54,7 @@ p := DelimccPrompt named: 'p'.
 These marks replaced the exception-based machinery, which is gone: `DelimitedControlException`, `BlockClosure>>#resetContext:` and `PartialContinuation>>#copy:bottomContextDo:` were removed, and `DelimitedDynamicVariableRef` is no longer a `Notification`, so it has no `dynVar:`, `hasValue` or `handles:`, and `[ p dref ] on: p do: [ :e | ... ]` no longer intercepts the lookup of `p`.
 
 ### Invocations
-A capture cuts the contexts of `k` off the stack, so `k` does not hold the stack below its delimiter. The first invocation of `k` runs these contexts themselves: it is exactly the computation that the capture interrupted. Every later invocation runs fresh copies, made from a template that the first one keeps (`DelimccSliceCopier`), in which the closures, the exceptions and the contexts of `k` refer to each other's copies. So a `^` in a block of `k` returns from the copy of its home, and an exception handler of `k` handles, resumes, retries and returns in its copy, in every invocation.
+A capture cuts the contexts of `k` off the stack, so `k` does not hold the stack below its delimiter. The first invocation of `k` runs these contexts themselves: it is exactly the computation that the capture interrupted. Every later invocation runs fresh copies, made from a template that the first one keeps (`DelimccSliceCopier`), or, for a `k` deeper than 16 contexts, that the second one makes from a plain copy that the first one keeps (`DelimccSliceSnapshot`), in which the closures, the exceptions and the contexts of `k` refer to each other's copies. So a `^` in a block of `k` returns from the copy of its home, and an exception handler of `k` handles, resumes, retries and returns in its copy, in every invocation.
 
 ```smalltalk
 { [ #( 1 2 3 ) detect: [ :x | [ :k | (k value: true) + (k value: false) ] shift ] ifNone: [ 0 ] ] reset.
@@ -104,7 +104,7 @@ log asArray
 - A temporary of a scope that has ended, such as a loop body of an earlier iteration or a block that has returned, is in no context of `k` any more: a closure of that scope that `k` runs shares it with every invocation, as a heap object.
 - The debugger steps into and over captures and invocations, and the copies leave out the contexts that it inserts to step over a send, as the first invocation does once that step cannot end, when k has escaped the capture.
 - Continuations are not serialisable: a materialised `k` holds a copy of its prompt, which the delimiters of the original prompt do not delimit.
-- The first invocation keeps a template of `k`, which costs about as much as copying its contexts once, so a shallow `k` invoked once or twice costs up to 1.5 times what one plain copy did, while a deep `k` invoked many times costs about half.
+- Against the plain copy of each invocation that preceded the template (`scripts/bench.st`, on P12 and P15): a `k` of 16 contexts or fewer, fixed at its first invocation, costs up to about 1.9 times when invoked once or twice; a deeper `k` invoked once, as by a generator, costs 1.2 to 2.2 times, since its first invocation only copies it, one invoked exactly twice up to about 3.2 times, and one invoked many times about half.
 
 ## Attribution
 The work is by 	Frank Shearar and	Levente Uzonyi, I just loaded in Pharo and did a little fix to make tests green.
