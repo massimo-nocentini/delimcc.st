@@ -4,7 +4,8 @@ invokeWith: anObject unwinding: aBoolean
 	Each check signals its Error with ^ from here, before anything changes, so when a handler resumes it, my sender answers what the handler resumed with."
 
 	| captured mine process current context index capturedIndex unwindBlock |
-	values ifNil: [ ^ self error: 'This continuation was never captured' ].
+	(values isNil or: [ values isEmpty ]) ifTrue: [
+		^ self error: 'This continuation was never captured' ].
 	captured := self capturedContexts.
 	mine := captured asIdentitySet.
 	(thisContext findContextSuchThat: [ :each | mine includes: each ])
