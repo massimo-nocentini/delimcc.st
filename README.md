@@ -33,7 +33,7 @@ Methods that `Delimcc-Continuation` overrides or adds:
 - `Continuation>>#capturedContexts` and `Continuation>>#signalIfAnotherProcessRuns:` (new, private). These are the two checks above. Nothing is recorded when the continuation is captured. Only when the current stack shares no frame with the captured one does `value:` scan the live processes, looking for one whose bottom context is the captured bottom one.
 - `Continuation>>#cull:`, `#cull:cull:`, `#cull:cull:cull:`, `#cull:cull:cull:cull:` and `#valueWithPossibleArgs:` (new). They invoke the continuation with the first argument, or with nil when there is none, as a one-argument block does. So `k` can be an exception handler (`[ 1 / 0 ] on: ZeroDivide do: k`), the argument of `ifNotNil:`, and any block of the `try:` family.
 - `Continuation>>#valueWithArguments:` resumes with nil when the array is empty, as `value` does.
-- `Continuation class>>#try:otherwise:` culls its try block, as `try:or:otherwise:` and `try:or:or:otherwise:` already did, so the try block can take no argument.
+- `Continuation class>>#try:otherwise:` culls its try block. `try:or:otherwise:` and `try:or:or:otherwise:` pass their try block to it, so in all three the try block can now take no argument. Stock `try:otherwise:` sent it `value:`, so all three raised `ArgumentsCountMismatch` for a try block such as `[ 42 ]`.
 
 Methods that `Delimcc-Continuation-Tests` overrides or adds:
 - `TwoInARowStar>>#tree:` and `#T:` end the walk with the walker itself, not with nil, and `tree:` no longer requires the first atom to be a Symbol. So `(1 1)` and `(nil nil)` have two in a row.
