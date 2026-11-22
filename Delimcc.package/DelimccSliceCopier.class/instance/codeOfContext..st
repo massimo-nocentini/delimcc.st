@@ -1,9 +1,8 @@
 codes
 codeOfContext: aContext
-	"Answer the index of aContext among my contexts, or 0. A short slice is searched, a long one indexed."
+	"R6 and R9: answer the index of aContext among my contexts, the code of its copy when it is the context of a block whose home is one of them (#codeOfDeadContext:), or 0."
 
-	| size |
-	size := frames size.
-	size > 16 ifTrue: [ ^ (frameIndexes ifNil: [ self indexFrames ]) at: aContext ifAbsent: [ 0 ] ].
-	1 to: size do: [ :i | (frames at: i) == aContext ifTrue: [ ^ i ] ].
-	^ 0
+	| index |
+	index := self indexOfFrame: aContext.
+	index = 0 ifTrue: [ ^ self codeOfDeadContext: aContext ].
+	^ index
