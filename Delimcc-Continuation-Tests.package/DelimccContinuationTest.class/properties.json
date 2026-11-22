@@ -1,0 +1,18 @@
+{
+	"commentStamp" : "",
+	"super" : "TestCase",
+	"category" : "Delimcc-Continuation-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"k",
+		"log",
+		"shots",
+		"count",
+		"tmp",
+		"frame"
+	],
+	"name" : "DelimccContinuationTest",
+	"type" : "normal"
+}
