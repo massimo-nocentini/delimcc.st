@@ -12,7 +12,7 @@ value: anObject
 	mine := captured asIdentitySet.
 	shared := thisContext findContextSuchThat: [ :each | mine includes: each ].
 	shared ifNil: [
-		process := self anotherLiveProcessRunning: captured last.
+		process := self anotherLiveProcessRunning: mine.
 		process ifNotNil: [
 			^ self error:
 				  'This continuation belongs to the stack of another live process: '
