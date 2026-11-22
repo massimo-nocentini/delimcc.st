@@ -1,10 +1,9 @@
 controlling
 delimiterFrom: aContext
-	"Answer the nearest context, from aContext down its senders, that evaluates #delimit: on me, or nil when there is none."
+	"Answer the nearest context, from aContext down its senders, that evaluates #delimit: on me, or nil when there is none. The selector is compared, not the method, so a continuation captured before #delimit: was recompiled still holds a delimiter."
 
-	| delimit context |
-	delimit := DelimccPrompt >> #delimit:.
+	| context |
 	context := aContext.
-	[ context isNil or: [ context method == delimit and: [ context receiver == self ] ] ]
+	[ context isNil or: [ context receiver == self and: [ context selector == #delimit: ] ] ]
 		whileFalse: [ context := context sender ].
 	^ context

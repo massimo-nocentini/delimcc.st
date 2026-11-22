@@ -1,4 +1,4 @@
-I tag a delimiter on the call stack. A block evaluated by my #delimit: runs delimited by me: the context of #delimit: is the delimiter, and #delimiterFrom: finds the nearest one of mine by walking the senders and comparing method and receiver by identity.
+I tag a delimiter on the call stack. A block evaluated by my #delimit: runs delimited by me: the context of #delimit: is the delimiter, and #delimiterFrom: finds the nearest one of mine by walking the senders and comparing the receiver by identity and the selector, not the method, so that recompiling #delimit: does not invalidate the continuations captured before.
 
 No exception is signalled to find a delimiter, so no handler between a #shift and its #reset, however generic (on: Exception do:, on: Notification do:), can intercept it, and a missing delimiter is just nil.
 
