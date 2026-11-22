@@ -1,0 +1,1 @@
+I execute the examples of the section Semantics of README.md, which #examples holds verbatim: each one must answer what its last line shows, in a comment that starts with -->. scripts/readme.st checks that #examples and the README have the same examples, so change both together.
