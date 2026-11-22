@@ -1,0 +1,1 @@
+I am an Error with a method that makes a block whose receiver is me: DelimccSliceTest captures a slice in which that block and I are copied, to show that the copy of the block is re-pointed to my copy.
