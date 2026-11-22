@@ -3,7 +3,7 @@ Run it in an image where Delimcc and Delimcc-Tests are loaded, for example
   pharo --headless X.image --no-default-preferences st --quit scripts/bench.st
 It prints one line per benchmark, the best of DCC_REPS runs (5 by default) in ms, after a warm-up run.
 Compare two versions by running it in an image of each one, on a quiet machine, pinned to one core (taskset -c N).
-B1-B9 are those of the review fixes, P1-P7 those of the copy-on-reuse experiment, C1-C5 those of callcc (review-control)."
+B1-B9 are those of the review fixes, P1-P7 those of the copy-on-reuse experiment, X1-X2 continuations invoked once over slices with closures (review-perf 1), C1-C5 those of callcc (review-control)."
 | log reps best deep k subject |
 log := [ :line | Stdio stdout nextPutAll: line asString; lf; flush ].
 reps := (OSEnvironment current at: 'DCC_REPS' ifAbsent: [ '5' ]) asNumber.
@@ -25,6 +25,9 @@ subject compile: 'deepBlocks: n
 	n = 0 ifTrue: [ ^ [ :k | k ] shift ].
 	#( 1 ) do: [ :x | r := 1 + (self deepBlocks: n - 1) ].
 	^ r'.
+subject compile: 'walk: n do: aBlock
+	n = 0 ifTrue: [ ^ aBlock value: 1 ].
+	#( 0 1 ) do: [ :b | self walk: n - 1 do: aBlock ]'.
 deep := nil.
 deep := [ :n :leaf | n = 0 ifTrue: [ leaf value ] ifFalse: [ 1 + (deep value: n - 1 value: leaf) ] ].
 best value: 'B1 [1 + [:k | k value: 1] shift] reset x100000' value: [ 100000 timesRepeat: [ [ 1 + [ :kk | kk value: 1 ] shift ] reset ] ].
@@ -48,6 +51,14 @@ best value: 'P5 10000 x capture, k discarded' value: [ (1 to: 10000) inject: 0 i
 best value: 'P6 hansei xor of 12 flips' value: [
 	([ (1 to: 12) inject: false into: [ :a :i | a ~= (true bernoulli: 1 / 2) ] ] hansei inferenceExact) asValuesDictionary ].
 best value: 'P7 HanseiTest suite' value: [ HanseiTest suite run ].
+best value: 'X1 900 frames + 300 closures + 300 vectors, capture + 1 shot x100' value: [
+	100 timesRepeat: [ [ subject new deepBlocks: 300 ] reset value: 1 ] ].
+best value: 'X2 generator over a depth-10 tree walk, 1024 one-shot k, x10' value: [
+	10 timesRepeat: [
+		k := [
+		     subject new walk: 10 do: [ :x | [ :kk | kk ] shift ].
+		     nil ] reset.
+		[ k isNil ] whileFalse: [ k := k value: nil ] ] ].
 best value: 'C1 callcc normal return, no reset x10000' value: [ 10000 timesRepeat: [ [ :kk | 1 ] callcc ] ].
 best value: 'C2 callcc normal return, reset right below x10000' value: [ [ 10000 timesRepeat: [ [ :kk | 1 ] callcc ] ] reset ].
 best value: 'C3 callcc escape, reset right below x10000' value: [ [ 10000 timesRepeat: [ [ :kk | kk value: 1 ] callcc ] ] reset ].

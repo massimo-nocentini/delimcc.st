@@ -20,7 +20,8 @@
 		"shared",
 		"lastShared",
 		"misordered",
-		"closureScans"
+		"closureScans",
+		"snapshots"
 	],
 	"name" : "DelimccSliceCopier",
 	"type" : "normal"

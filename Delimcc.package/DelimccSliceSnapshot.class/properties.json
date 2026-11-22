@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Delimcc-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"frames",
+		"copies",
+		"snapshots",
+		"template"
+	],
+	"name" : "DelimccSliceSnapshot",
+	"type" : "normal"
+}
