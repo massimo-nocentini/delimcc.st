@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "ProtoObject",
+	"category" : "Delimcc-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "DelimccTestProxy",
+	"type" : "normal"
+}

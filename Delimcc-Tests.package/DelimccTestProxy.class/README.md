@@ -1,0 +1,1 @@
+I am a ProtoObject, as a proxy is, so I understand almost no message: DelimccSliceTest puts my methods and me in the slices of the stack that a PartialContinuation runs and copies, to show that they send me nothing that Object alone implements.
