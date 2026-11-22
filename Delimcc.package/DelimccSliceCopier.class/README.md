@@ -8,6 +8,7 @@ The rules, each of which some test of DelimccSliceTest needs:
 - R5 a temp vector that a context of the slice has created, as DelimccTempVectorScanner finds it, is copied, so the temporaries of a frame are copied with it whatever the compiler did with them (#codeOfArray:);
 - R6 a context of the slice that a slot holds, thisContext stored in a temporary, is re-pointed;
 - R7 everything else is shared: the prompt, the receivers of the methods, the collections and other heap objects, the dynamic variables, and the closures and temp vectors of the contexts below the slice. A closure that a heap object holds is not re-pointed, so its ^ works in the first invocation only.
+- R8 the contexts that the debugger inserts to step over a send (Context>>#isSteppingGuardDelimcc) are left out of the copies (#leaveOutSteppingGuards): they jump back into a debugging operation that is over by the time a copy runs.
 
 #templateSharingTempVectorsOf:for: turns R5 off: the temp vectors are shared by the copies and by the contexts themselves, as callcc needs, since its contexts keep running. It fixes copies that #copiesOf: made earlier, so that callcc copies the contexts when it is called but fixes them only when its continuation is first invoked.
 
