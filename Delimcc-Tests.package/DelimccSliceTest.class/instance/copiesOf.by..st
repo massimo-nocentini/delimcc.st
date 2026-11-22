@@ -5,5 +5,5 @@ copiesOf: aContinuation by: aCopier
 	| top |
 	top := aContinuation instVarNamed: #from.
 	aContinuation instVarNamed: #from put: nil.
-	aContinuation instVarNamed: #template put: (aCopier templateOf: (aContinuation framesFrom: top)).
+	aContinuation instVarNamed: #template put: (aCopier templateOf: (aContinuation framesFrom: top upTo: nil)).
 	^ aContinuation

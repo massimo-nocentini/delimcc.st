@@ -9,7 +9,8 @@
 		"from",
 		"to",
 		"prompt",
-		"template"
+		"template",
+		"originals"
 	],
 	"name" : "PartialContinuation",
 	"type" : "normal"

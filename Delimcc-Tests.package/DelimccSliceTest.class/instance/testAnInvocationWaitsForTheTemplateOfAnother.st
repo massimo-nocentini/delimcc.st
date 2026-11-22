@@ -9,7 +9,7 @@ testAnInvocationWaitsForTheTemplateOfAnother
 	done := Semaphore new.
 	[
 	(Delay forMilliseconds: 20) wait.
-	k instVarNamed: #template put: (DelimccSliceCopier templateOf: (k framesFrom: top)).
+	k instVarNamed: #template put: (DelimccSliceCopier templateOf: (k framesFrom: top upTo: nil)).
 	done signal ] forkAt: Processor activePriority - 1.
 	self assert: (k value: 41) equals: 42.
 	done wait.

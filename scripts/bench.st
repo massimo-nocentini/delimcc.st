@@ -3,7 +3,7 @@ Run it in an image where Delimcc and Delimcc-Tests are loaded, for example
   pharo --headless X.image --no-default-preferences st --quit scripts/bench.st
 It prints one line per benchmark, the best of DCC_REPS runs (5 by default) in ms, after a warm-up run.
 Compare two versions by running it in an image of each one, on a quiet machine, pinned to one core (taskset -c N).
-B1-B9 are those of the review fixes, P1-P7 those of the copy-on-reuse experiment."
+B1-B9 are those of the review fixes, P1-P7 those of the copy-on-reuse experiment, C1-C5 those of callcc (review-control)."
 | log reps best deep k subject |
 log := [ :line | Stdio stdout nextPutAll: line asString; lf; flush ].
 reps := (OSEnvironment current at: 'DCC_REPS' ifAbsent: [ '5' ]) asNumber.
@@ -47,4 +47,19 @@ best value: 'P4 10000 x capture + 2 shots' value: [
 best value: 'P5 10000 x capture, k discarded' value: [ (1 to: 10000) inject: 0 into: [ :a :i | a + [ 1 + ([ :kk | i ] shift) ] reset ] ].
 best value: 'P6 hansei xor of 12 flips' value: [
 	([ (1 to: 12) inject: false into: [ :a :i | a ~= (true bernoulli: 1 / 2) ] ] hansei inferenceExact) asValuesDictionary ].
-best value: 'P7 HanseiTest suite' value: [ HanseiTest suite run ]
+best value: 'P7 HanseiTest suite' value: [ HanseiTest suite run ].
+best value: 'C1 callcc normal return, no reset x10000' value: [ 10000 timesRepeat: [ [ :kk | 1 ] callcc ] ].
+best value: 'C2 callcc normal return, reset right below x10000' value: [ [ 10000 timesRepeat: [ [ :kk | 1 ] callcc ] ] reset ].
+best value: 'C3 callcc escape, reset right below x10000' value: [ [ 10000 timesRepeat: [ [ :kk | kk value: 1 ] callcc ] ] reset ].
+#( 10 100 1000 ) do: [ :d |
+	best
+		value: 'C4 callcc normal return, reset ' , d printString , ' frames below x1000'
+		value: [ [ deep value: d value: [ 1000 timesRepeat: [ [ :kk | 1 ] callcc ] ] ] reset ] ].
+best value: 'C5 callcc loop re-entered 1000 times' value: [
+	| m kc |
+	[
+	m := [ :kk |
+	     kc := kk.
+	     0 ] callcc.
+	m < 1000 ifTrue: [ kc value: m + 1 ].
+	m ] reset ]
