@@ -8,7 +8,9 @@
 	"instvars" : [
 		"p",
 		"q",
-		"log"
+		"log",
+		"outcome",
+		"isolation"
 	],
 	"name" : "DelimccPromptTest",
 	"type" : "normal"
