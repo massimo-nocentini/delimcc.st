@@ -1,5 +1,6 @@
 exploring
 asValuesDictionaryNormalized: normalized
+	"A distribution without mass cannot be normalized: I answer its weights as they are."
 
 	| values cumulated suspended |
 	suspended := Dictionary new.
@@ -15,7 +16,7 @@ asValuesDictionaryNormalized: normalized
 			cDictionary: suspended
 			weight: w ].
 
-	normalized ifTrue: [
+	(normalized and: [ cumulated isZero not ]) ifTrue: [
 		values keysAndValuesDo: [ :k :v | values at: k put: v / cumulated ].
 
 		suspended keysAndValuesDo: [ :k :v |
