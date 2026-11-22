@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "TestCase",
+	"category" : "Delimcc-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"p",
+		"q",
+		"log"
+	],
+	"name" : "DelimccPromptTest",
+	"type" : "normal"
+}

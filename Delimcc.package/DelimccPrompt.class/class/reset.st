@@ -2,4 +2,4 @@ accessing
 reset
 	"Answer the prompt that BlockClosure>>#reset and #shift use."
 
-	^ Reset ifNil: [ Reset := self new ]
+	^ Reset ifNil: [ Reset := self named: 'reset' ]

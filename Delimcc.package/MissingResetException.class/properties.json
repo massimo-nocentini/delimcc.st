@@ -5,7 +5,9 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"prompt"
+	],
 	"name" : "MissingResetException",
 	"type" : "normal"
 }

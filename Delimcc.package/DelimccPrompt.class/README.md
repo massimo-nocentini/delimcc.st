@@ -1,5 +1,10 @@
-I tag a delimiter on the call stack. A block evaluated by my #delimit: runs delimited by me: the context of #delimit: is the delimiter, and #delimiterFrom: finds the nearest one of mine by walking the senders and comparing the receiver by identity and the selector, not the method, so that recompiling #delimit: does not invalidate the continuations captured before.
+I am a prompt of the multi-prompt core of delimited control of Dybvig, Peyton Jones and Sabry: DelimccPrompt new is newPrompt, and #named: gives a name to print. My instances are independent of each other, and a capture to one of them goes through the delimiters of the others.
 
-No exception is signalled to find a delimiter, so no handler between a #shift and its #reset, however generic (on: Exception do:, on: Notification do:), can intercept it, and a missing delimiter is just nil.
+- p delimit: aBlock is pushPrompt: it evaluates aBlock delimited by me, and its context is the delimiter.
+- p withSubCont: [ :k | ... ] is withSubCont: it cuts the contexts from its sender down to my nearest delimiter off the stack, the delimiter too, reifies them as a PartialContinuation k without the delimiter, and answers what the block answers to the sender of the delimiter.
+- k pushSubCont: aBlock is pushSubCont, and k value: x is k pushSubCont: [ x ].
+- p isDelimiting is is_prompt_set of Kiselyov's delimcc.
 
-BlockClosure>>#reset delimits with the prompt that my class answers to #reset. Other instances are other prompts, independent of each other: they are the prompt tags of a multi-prompt core (newPrompt, pushPrompt, withSubCont, pushSubCont, after Dybvig, Peyton Jones and Sabry), which can be built on #delimit: and #delimiterFrom:.
+#delimiterFrom: finds the nearest delimiter of mine by walking the senders and comparing the receiver by identity and the selector, not the method, so that recompiling #delimit: does not invalidate the continuations captured before. No exception is signalled to find a delimiter, so no handler between a capture and its delimiter, however generic (on: Exception do:, on: Notification do:), can intercept it. A capture without a delimiter signals MissingResetException, which names me, and changes nothing.
+
+BlockClosure>>#reset delimits with the prompt that my class answers to #reset.

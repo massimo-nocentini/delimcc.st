@@ -7,7 +7,9 @@
 	"classvars" : [
 		"Reset"
 	],
-	"instvars" : [ ],
+	"instvars" : [
+		"name"
+	],
 	"name" : "DelimccPrompt",
 	"type" : "normal"
 }

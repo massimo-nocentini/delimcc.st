@@ -7,7 +7,8 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"from",
-		"to"
+		"to",
+		"prompt"
 	],
 	"name" : "PartialContinuation",
 	"type" : "normal"

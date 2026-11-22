@@ -1,0 +1,1 @@
+I exercise the multi-prompt core of DelimccPrompt and PartialContinuation, after Dybvig, Peyton Jones and Sabry: p and q are two independent prompts.

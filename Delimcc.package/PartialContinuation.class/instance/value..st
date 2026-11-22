@@ -1,22 +1,6 @@
 evaluating
 value: anObject
-	"Copy the contexts of the continuation and stitch them onto the current call
-	stack by telling the bottom context that thisContext's sender called it.
-	'thisContext sender' because thisContext refers to the context of the #value: call."
+	"Run a copy of my contexts on top of the current call stack, anObject being the answer of the capture that reified me, and answer what they answer. The contexts are copied at each invocation, so I can be invoked many times."
 
-	| topContext bottomContext |
-	topContext := self context. "copy the whole stack, once"
-
-	bottomContext := topContext.
-	[ bottomContext sender isNil ] whileFalse: [
-		bottomContext := bottomContext sender ].
-
-	bottomContext swapSender: thisContext sender.
-	"Tell thisContext that its sender was actually the last/top-most context."
-	thisContext swapSender: topContext.
-	"Finally, 'return' anObject from the caller context... which thanks to the line
-	above, is actually values first. This effectively sets anObject as the parameter
-	to the reified partial continuation, because instead of 'returning' to our caller
-	we 'return' to the next part of the computation - our
-	partial-continuation-as-function."
+	self insertCopyBelow: thisContext.
 	^ anObject

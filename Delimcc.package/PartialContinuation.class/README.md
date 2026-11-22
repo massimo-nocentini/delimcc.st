@@ -1,1 +1,1 @@
-I am a slice of a call stack, that is to say, some sequence of ContextParts. Use me like a Block by calling my #value or #value: methods.
+I am a slice of a call stack, the contexts that a capture cut off the stack down to a delimiter of my #prompt, a DelimccPrompt. Use me like a block with #value or #value:, or with #pushSubCont:, which evaluate a copy of my contexts on top of the current call stack: each invocation copies them, so I can be invoked many times.
