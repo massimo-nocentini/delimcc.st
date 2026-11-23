@@ -18,7 +18,7 @@ tree inferenceExact asValuesDictionary first
 ## Exploring
 
 - `inferenceExact` runs every branch, and `inferenceUpToDepth:` those up to a depth. Both answer another tree, in which the weights of equal values have been added up.
-- `asValuesDictionary` answers two Dictionaries: the weights of the values among my children, and those of the branches not run yet. `asValuesDictionaryNormalized: true` divides them by their sum, and `mean`, or `average`, is the first of the two then.
+- `asValuesDictionary` answers two Dictionaries: the weights of the values among my children, and those of the branches not run yet. `asValuesDictionaryNormalized: true` divides them by their sum, unless it is zero, and `mean`, or `average`, is the first of the two then.
 - `reflect`, inside another model, makes my outcomes a choice of that model; `BlockClosure>>#bucket` uses it to explore a function of a model once for each argument.
 - `asPresenter` shows me in a tree presenter.
 
