@@ -5,10 +5,10 @@ codeOfDeadContext: aContext
 	| context closure code |
 	context := aContext.
 	[
-	(closure := context closure) == nil ifTrue: [ ^ 0 ].
-	(context := closure outerContext) == nil ifTrue: [ ^ 0 ].
+	closure := context closure ifNil: [ ^ 0 ].
+	context := closure outerContext ifNil: [ ^ 0 ].
 	(self indexOfFrame: context) = 0 ] whileTrue.
-	originals == nil ifFalse: [ (self codeOf: aContext) ifNotNil: [ :known | ^ known ] ].
+	originals ifNotNil: [ (self codeOf: aContext) ifNotNil: [ :known | ^ known ] ].
 	closure := aContext closure sliceCodeDelimcc: self.
 	(closure = 0 or: [ aContext isDead not ]) ifTrue: [ ^ 0 ].
 	code := self register: aContext.

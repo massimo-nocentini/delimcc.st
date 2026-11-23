@@ -3,11 +3,10 @@ codeOfClosure: aClosure
 	"R3: copy aClosure when its outer context (instance variable 1), its receiver (4) or one of its copied values (negative fields) has a copy. A shared closure that holds other closures is remembered, so that it is scanned once, with them, however many fields hold it."
 
 	| scans outer receiver values code |
-	originals == nil ifFalse: [ (self codeOf: aClosure) ifNotNil: [ :known | ^ known ] ].
-	outer := aClosure outerContext.
-	outer := outer == nil
-		         ifTrue: [ 0 ]
-		         ifFalse: [ self codeOfContext: outer ].
+	originals ifNotNil: [ (self codeOf: aClosure) ifNotNil: [ :known | ^ known ] ].
+	outer := aClosure outerContext
+		         ifNil: [ 0 ]
+		         ifNotNil: [ :context | self codeOfContext: context ].
 	(outer = 0 and: [ self isShared: aClosure ]) ifTrue: [ ^ 0 ].
 	scans := closureScans := closureScans + 1.
 	receiver := self codeOfReceiver: aClosure receiver.
@@ -15,7 +14,7 @@ codeOfClosure: aClosure
 		| value |
 		value := (aClosure basicAt: i) sliceCodeDelimcc: self.
 		value = 0 ifFalse: [ (values ifNil: [ values := Array new: aClosure basicSize withAll: 0 ]) at: i put: value ] ].
-	(outer = 0 and: [ receiver = 0 and: [ values == nil ] ]) ifTrue: [
+	(outer = 0 and: [ receiver = 0 and: [ values isNil ] ]) ifTrue: [
 		^ closureScans = scans
 			  ifTrue: [ 0 ]
 			  ifFalse: [ self shared: aClosure ] ].

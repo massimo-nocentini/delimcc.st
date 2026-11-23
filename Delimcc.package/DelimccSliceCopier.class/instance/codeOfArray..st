@@ -4,7 +4,7 @@ codeOfArray: anArray
 
 	| code |
 	sharesTempVectors ifTrue: [ ^ 0 ].
-	originals == nil ifFalse: [ (self codeOf: anArray) ifNotNil: [ :known | ^ known ] ].
+	originals ifNotNil: [ (self codeOf: anArray) ifNotNil: [ :known | ^ known ] ].
 	current = 0 ifTrue: [ ^ 0 ].
 	(self isTempVectorOfTheCurrentFrame: anArray) ifFalse: [ ^ self shared: anArray ].
 	(self isShared: anArray) ifTrue: [ misordered := true ].
