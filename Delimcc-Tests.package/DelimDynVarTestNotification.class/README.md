@@ -1,0 +1,1 @@
+I am a `Notification` that `ControlTest` signals and handles with `on:do:`, as a dynamic variable whose value is what the handler resumes me with, or nil without a handler.

@@ -1,0 +1,1 @@
+I am a branch of a `DelimccSearchTree`: an `object`, the `DelimccSearchTreeNode` where the branch goes, and its `weight`.

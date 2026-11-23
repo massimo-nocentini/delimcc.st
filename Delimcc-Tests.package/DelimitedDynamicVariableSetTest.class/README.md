@@ -1,0 +1,1 @@
+I test `DelimitedDynamicVariableSet`: binding several variables at once with `dlet:in:`, nested bindings, `dset:` on one of the variables, nil as a value, and lookups that generic exception handlers do not answer.

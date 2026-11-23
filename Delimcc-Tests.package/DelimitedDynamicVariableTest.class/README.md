@@ -1,0 +1,1 @@
+I test `DelimitedDynamicVariable`: its default value, `dref`, `dset:` and nested `dlet:in:`, variables that do not interfere, the part of the dynamic environment that a continuation of `shift` captures or leaves out, a binding shared by the invocations of a continuation, and lookups that generic exception handlers do not answer.

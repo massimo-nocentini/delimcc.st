@@ -1,0 +1,3 @@
+I am the abstract superclass of the nodes of a `DelimccSearchTree`: `DelimccSearchTreeNodeV`, a value (`valued:`), and `DelimccSearchTreeNodeC`, a suspended computation (`suspended:`). My `slot` is that value or that computation.
+
+I have no `children`, but a suspended computation has. My subclasses go on from their values (`reflect:`, `>>=`) and add their weight to one of the dictionaries of `DelimccSearchTree>>#asValuesDictionaryNormalized:` (`vDictionary:cDictionary:weight:`). `#localProbability:probability:depth:upToDepth:down:choices:answers:` is my step of an exploration: I prepend myself to the answers, with the product of the probabilities as my weight, and go on with the other choices.
