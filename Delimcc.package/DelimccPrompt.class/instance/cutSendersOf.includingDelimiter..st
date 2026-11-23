@@ -19,4 +19,4 @@ Signal MissingResetException, and change nothing, when no delimiter of mine is t
 	aContext privSender: delimiter sender.
 	bottom ifNil: [ ^ PartialContinuation new prompt: self from: nil ].
 	bottom privSender: nil.
-	^ PartialContinuation new prompt: self from: top
+	^ PartialContinuation new prompt: self from: top to: bottom

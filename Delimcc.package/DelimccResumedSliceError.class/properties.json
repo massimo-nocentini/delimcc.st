@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "Error",
+	"category" : "Delimcc-Exceptions",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"continuation"
+	],
+	"name" : "DelimccResumedSliceError",
+	"type" : "normal"
+}
