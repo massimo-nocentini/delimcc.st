@@ -1,15 +1,19 @@
-Usually, dynamic variables (such as DynamicVariable) permit either closing over all or none of that variable's changes, causing unexpected and buggy interactions with partial continuations. For example, in the function returned by the #shift in the below:
+Usually, dynamic variables (such as `DynamicVariable`) permit either closing over all or none of that variable's changes, causing unexpected and buggy interactions with partial continuations. For example, in the function returned by the `#shift` in the below:
 
-    TestDynamicVariable value: 1 during: [
-        [TestDynamicVariable value: 2 during: [
-            [:k| TestDynamicVariable value ] shift ]] reset]
+```smalltalk
+TestDynamicVariable value: 1 during: [
+    [TestDynamicVariable value: 2 during: [
+        [:k| TestDynamicVariable value ] shift ]] reset]
+```
 
-we expect TestDynamicVariable's value to be 1. After all, we have cut out from the stack that part that sets TestDynamicVariable's value to 2. Unfortunately, TestDynamicVariable value = 2, because DynamicVariable is a sequence of do/undo operations not stored directly on the stack.
+we expect `TestDynamicVariable`'s value to be 1. After all, we have cut out from the stack that part that sets `TestDynamicVariable`'s value to 2. Unfortunately, `TestDynamicVariable value = 2`, because `DynamicVariable` is a sequence of do/undo operations not stored directly on the stack.
 
-A DelimitedDynamicVariable, on the other hand, permits #shift to close over PART of a dynamic variable's extent.
+A `DelimitedDynamicVariable`, on the other hand, permits `#shift` to close over PART of a dynamic variable's extent.
 
 For a deep investigation into the bad interactions between full dynamic variables and delimited continuations, see http://okmij.org/ftp/Computation/dynamic-binding.html#DDBinding
 
-A #dlet:in: binds its variable to a DelimitedDynamicVariableRef and marks the call stack with it; #dref and #dset: find the innermost binding by walking the senders, without signalling any exception. So no handler, however generic (on: Exception do:), can answer for a variable, and nil can be bound like any other value.
+## How a binding is found
 
-The walk takes time in proportion to the frames between a #dref or a #dset: and the binding, or to all the frames when there is none. Up to some 10 to 25 frames it is as fast as the exception-based lookup it replaced, or faster, but the VM scanned for that one natively, so at 1000 frames the walk is 4 to 5 times slower.
+A `#dlet:in:` binds its variable to a `DelimitedDynamicVariableRef` and marks the call stack with it; `#dref` and `#dset:` find the innermost binding by walking the senders, without signalling any exception. So no handler, however generic (`on: Exception do:`), can answer for a variable, and nil can be bound like any other value.
+
+The walk takes time in proportion to the frames between a `#dref` or a `#dset:` and the binding, or to all the frames when there is none. Up to some 10 to 25 frames it is as fast as the exception-based lookup it replaced, or faster, but the VM scanned for that one natively, so at 1000 frames the walk is 4 to 5 times slower.

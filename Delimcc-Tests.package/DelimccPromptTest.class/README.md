@@ -1,3 +1,3 @@
-I exercise the multi-prompt core of DelimccPrompt and PartialContinuation, after Dybvig, Peyton Jones and Sabry: p and q are two independent prompts. The examples are the classic ones of the literature: Shan's probe of the four operators, the traversal of Biernacki, Danvy and Shan, multi-shot amb, and same fringe with two generators on two prompts.
+I exercise the multi-prompt core of `DelimccPrompt` and `PartialContinuation`, after Dybvig, Peyton Jones and Sabry: `p` and `q` are two independent prompts. The examples are the classic ones of the literature: Shan's probe of the four operators, the traversal of Biernacki, Danvy and Shan, multi-shot amb, and same fringe with two generators on two prompts.
 
-The tests of protocol 'tests - copies' are review #1 and #2 on the prompt API: they need the copies of a slice to re-point its closures and its exceptions (DelimccSliceCopier), and run isolated, as they ended the run before.
+The tests of protocol 'tests - copies' are review #1 and #2 on the prompt API: they need the copies of a slice to re-point its closures and its exceptions (`DelimccSliceCopier`), and run isolated, as they ended the run before.

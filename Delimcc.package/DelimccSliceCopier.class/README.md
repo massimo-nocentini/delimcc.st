@@ -1,16 +1,29 @@
-I make the DelimccSliceTemplate of a slice of the stack, the contexts of a PartialContinuation, top first, the bottom one with no sender: a copy of them, and of the objects that belong to them, whose references to each other are re-pointed to the copies, plus the list of these references, so that the template can make further copies without me.
+I make the `DelimccSliceTemplate` of a slice of the stack, the contexts of a `PartialContinuation`, top first, the bottom one with no sender: a copy of them, and of the objects that belong to them, whose references to each other are re-pointed to the copies, plus the list of these references, so that the template can make further copies without me.
 
-The rules, each of which some test of DelimccSliceTest needs:
-- R1 the copies of the contexts are chained as the contexts are;
-- R2 the receiver (#codeOfReceiver:), the closure (#codeOfClosureOfFrame:) and the stack slots of each context, temporaries and operands, are re-pointed;
-- R3 a closure (FullBlockClosure and its subclasses) is copied when its outer context, its receiver or one of its copied values has a copy (#codeOfClosure:); clean blocks are shared otherwise;
-- R4 an exception is copied when an instance variable refers to one of the contexts (signalContext, handlerContext, outerContext), and then all of them are re-pointed, so that resume:, return:, pass, outer and retry of a copy act on the copies (#codeOfException:);
-- R5 a temp vector that a context of the slice has created, as DelimccTempVectorScanner finds it, is copied, so the temporaries of a frame are copied with it whatever the compiler did with them (#codeOfArray:);
-- R6 a context of the slice that a slot holds, thisContext stored in a temporary, is re-pointed;
-- R7 everything else is shared: the prompt, the receivers of the methods, the collections and other heap objects, the dynamic variables, and the closures and temp vectors of the contexts below the slice. A closure that a heap object holds is not re-pointed, so its ^ works in the first invocation only.
-- R8 the contexts that the debugger inserts to step over a send (Context>>#isSteppingGuardDelimcc) are left out of the copies (#leaveOutSteppingGuards): they jump back into a debugging operation that is over by the time a copy runs. The first invocation runs them while their step goes on only (PartialContinuation>>#withoutAbandonedSteppingGuards:).
-- R9 the context of a block whose home is one of the contexts, and which has returned, is copied when its closure is, with its closure re-pointed (#codeOfDeadContext:): a closure made by that block keeps it as its outer context, through which a ^ in that closure finds the copy of its home.
+## The rules
 
-#templateSharingTempVectorsOf:for: turns R5 off: the temp vectors are shared by the copies and by the contexts themselves, as callcc needs, since its contexts keep running. It fixes copies that #copiesOf: made earlier, so that callcc copies the contexts when it is called but fixes them only when its continuation is first invoked. A DelimccSliceSnapshot fixes its copies in the same way when it is first instantiated, and the temp vectors and exceptions that it copied when the first invocation began are read in its copies (#snapshots:).
+The rules, each of which some test of `DelimccSliceTest` needs:
 
-The code of a copy is the index of its context, positive, or minus the index of its object; 0 means shared. Each object answers it to #sliceCodeDelimcc:, which dispatches on its kind. The contexts are fixed from the bottom up, so the temp vectors of a context are known before the contexts above it, which may refer to them, are fixed. A context below the owner of a vector may refer to it too, when a closure of the owner runs below it (k1 invoked from a block of its own contexts, a generator, two prompts): #templateOf:for: notes it and fixes the slice again with every vector registered first (#registerTempVectors). The references are fixed once every context is. The shared closures that hold other closures are remembered, so that each is scanned once, whatever number of fields hold it.
+- **R1** the copies of the contexts are chained as the contexts are;
+- **R2** the receiver (`#codeOfReceiver:`), the closure (`#codeOfClosureOfFrame:`) and the stack slots of each context, temporaries and operands, are re-pointed;
+- **R3** a closure (`FullBlockClosure` and its subclasses) is copied when its outer context, its receiver or one of its copied values has a copy (`#codeOfClosure:`); clean blocks are shared otherwise;
+- **R4** an exception is copied when an instance variable refers to one of the contexts (`signalContext`, `handlerContext`, `outerContext`), and then all of them are re-pointed, so that `resume:`, `return:`, `pass`, `outer` and `retry` of a copy act on the copies (`#codeOfException:`);
+- **R5** a temp vector that a context of the slice has created, as `DelimccTempVectorScanner` finds it, is copied, so the temporaries of a frame are copied with it whatever the compiler did with them (`#codeOfArray:`);
+- **R6** a context of the slice that a slot holds, `thisContext` stored in a temporary, is re-pointed;
+- **R7** everything else is shared: the prompt, the receivers of the methods, the collections and other heap objects, the dynamic variables, and the closures and temp vectors of the contexts below the slice. A closure that a heap object holds is not re-pointed, so its `^` works in the first invocation only.
+- **R8** the contexts that the debugger inserts to step over a send (`Context>>#isSteppingGuardDelimcc`) are left out of the copies (`#leaveOutSteppingGuards`): they jump back into a debugging operation that is over by the time a copy runs. The first invocation runs them while their step goes on only (`PartialContinuation>>#withoutAbandonedSteppingGuards:`).
+- **R9** the context of a block whose home is one of the contexts, and which has returned, is copied when its closure is, with its closure re-pointed (`#codeOfDeadContext:`): a closure made by that block keeps it as its outer context, through which a `^` in that closure finds the copy of its home.
+
+## Sharing the temp vectors
+
+`#templateSharingTempVectorsOf:for:` turns R5 off: the temp vectors are shared by the copies and by the contexts themselves, as callcc needs, since its contexts keep running. It fixes copies that `#copiesOf:` made earlier, so that callcc copies the contexts when it is called but fixes them only when its continuation is first invoked.
+
+A `DelimccSliceSnapshot` fixes its copies in the same way when it is first instantiated, and the temp vectors and exceptions that it copied when the first invocation began are read in its copies (`#snapshots:`).
+
+## Codes
+
+The code of a copy is the index of its context, positive, or minus the index of its object; 0 means shared. Each object answers it to `#sliceCodeDelimcc:`, which dispatches on its kind.
+
+The contexts are fixed from the bottom up, so the temp vectors of a context are known before the contexts above it, which may refer to them, are fixed. A context below the owner of a vector may refer to it too, when a closure of the owner runs below it (`k1` invoked from a block of its own contexts, a generator, two prompts): `#templateOf:for:` notes it and fixes the slice again with every vector registered first (`#registerTempVectors`).
+
+The references are fixed once every context is. The shared closures that hold other closures are remembered, so that each is scanned once, whatever number of fields hold it.

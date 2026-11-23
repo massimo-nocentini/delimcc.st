@@ -1,1 +1,1 @@
-I am a DelimccSliceCopier without one of its rules, which DelimccSliceTest turns off to show that a probe needs it: #receivers (R2 and R3), #closureOrNil (R2), #closures (R3), #exceptions (R4), #vectors (R5) or #deadContexts (R9).
+I am a `DelimccSliceCopier` without one of its rules, which `DelimccSliceTest` turns off to show that a probe needs it: `#receivers` (R2 and R3), `#closureOrNil` (R2), `#closures` (R3), `#exceptions` (R4), `#vectors` (R5) or `#deadContexts` (R9).

@@ -1,1 +1,1 @@
-I am a leaf of a search tree, HANSEI's V v: I hold a value of the model. Two leaves holding equal values are equal, so exploring a tree adds up their weights.
+I am a leaf of a search tree, HANSEI's `V v`: I hold a value of the model. Two leaves holding equal values are equal, so exploring a tree adds up their weights.
